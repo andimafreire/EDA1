@@ -11,8 +11,8 @@ public class RegistroActores {
 		return elRegistroActores;
 	}
 	
-	public Actor buscarActor(String pNom, String pApel, int pNum) {
-		return actores.buscarActor(pNom, pApel, pNum);		
+	public Actor buscarActor(String pApel, String pNom) {
+		return actores.buscarActor(pApel, pNom);		
 	}
 
 }

@@ -15,8 +15,8 @@ public class ListaPeliculas {
 		return peli;
 	}
 	
-	public void addPelicula(String pNombre) {
-
+	public void anadirPelicula(Pelicula pPeli) {
+		lista.add(pPeli);
 	}
 	
 	public void rmvPelicula(String pNombre) {
@@ -26,4 +26,6 @@ public class ListaPeliculas {
 	public void imprimirPeliculas() {
 		
 	}
+
+	public int obtenerNumPeliculas() {return lista.size();}
 }
