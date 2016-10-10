@@ -16,10 +16,15 @@ public class Pelicula {
 	}
 	
 	public void imprimirse() {
-
-	}
+		System.out.println("Nombre de la película: " + this.nombre);
+		System.out.println();
+		System.out.println("Recaudación de la película: " + this.recaudacion);
+		System.out.println();
+		System.out.println("Actores del reparto: ");
+		actores.imprimirActores();
+		}
 	
 	public void imprimirActores() {
-
+		actores.imprimirActores();
 	}
 }

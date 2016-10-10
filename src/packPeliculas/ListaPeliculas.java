@@ -15,6 +15,10 @@ public class ListaPeliculas {
 		return peli;
 	}
 	
+	public boolean esta(Pelicula pPeli) {
+		return lista.contains(pPeli);
+	}
+	
 	public void anadirPelicula(Pelicula pPeli) {
 		lista.add(pPeli);
 	}
