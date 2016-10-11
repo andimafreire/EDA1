@@ -9,14 +9,21 @@ public class Actor implements Comparable<Actor> {
 	private ListaPeliculas susPeliculas;
 
 	public Actor(String pApel, String pNom) {
-		//super was here
 		this.apellido = pApel;
 		this.nombre = pNom;
 		this.susPeliculas = new ListaPeliculas();
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
 	public void anadirPelicula(Pelicula p) {
-		if ((p != null) && (susPeliculas.esta(p))) {
+		if ((p != null) && (!susPeliculas.esta(p))) {
 			susPeliculas.anadirPelicula(p);
 		}
 	}
@@ -40,6 +47,6 @@ public class Actor implements Comparable<Actor> {
 
 	@Override
 	public int compareTo(Actor a) {
-		return this.nombre.compareTo(a.nombre) + this.apellido.compareTo(apellido);
+		return this.nombre.compareTo(a.nombre) + this.apellido.compareTo(a.apellido);
 	}
 }

@@ -1,6 +1,7 @@
 package packPeliculas;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ListaPeliculas {
 	private ArrayList<Pelicula> lista;
@@ -9,10 +10,19 @@ public class ListaPeliculas {
 		this.lista = new ArrayList<Pelicula>();
 	}
 	
+	private Iterator<Pelicula> getIterador() {return lista.iterator();}
+	
 	public Pelicula buscarPelicula(String pNombre) {
 		Pelicula peli = new Pelicula(pNombre);
-		
-		return peli;
+		Pelicula p = null;
+		Boolean esta = false;
+		Iterator<Pelicula> itr = this.getIterador();
+		while (itr.hasNext() && !esta) {
+			p = itr.next();
+			if (p.compareTo(peli)==0)
+				esta=true;
+		}
+		return p;
 	}
 	
 	public boolean esta(Pelicula pPeli) {
@@ -23,12 +33,13 @@ public class ListaPeliculas {
 		lista.add(pPeli);
 	}
 	
-	public void rmvPelicula(String pNombre) {
-		
-	}
-	
 	public void imprimirPeliculas() {
-		
+		Pelicula p;
+		Iterator<Pelicula> itr = this.getIterador();
+		while (itr.hasNext()) {
+			p = itr.next();
+			p.imprimirse();
+		}
 	}
 
 	public int obtenerNumPeliculas() {return lista.size();}

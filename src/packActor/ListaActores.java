@@ -11,16 +11,17 @@ public class ListaActores {
 	}
 	private Iterator<Actor> getIterador() {return this.lista.iterator();}
 	
-	public Actor buscarActor(String pApel, String pNom) {
+	public boolean estaActor(String pApel, String pNom) {
+		Boolean esta = false;
 		Actor actor = new Actor(pApel, pNom);
 		Actor a;
 		Iterator<Actor> itr = this.getIterador();
 		while (itr.hasNext()) {
 			a = itr.next();
 			if (a.compareTo(actor)==0)
-				return a;
+				esta=true;
 		}
-		return null;
+		return esta;
 	}
 
 	//TODO: preguntar si es necesario comprobar si el actor esta antes de añadir o eliminar
