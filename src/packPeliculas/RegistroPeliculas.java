@@ -2,16 +2,16 @@ package packPeliculas;
 
 public class RegistroPeliculas {
 	private ListaPeliculas pelis;
-	private RegistroPeliculas elRegistroPeliculas;
+	private static RegistroPeliculas elRegistroPeliculas;
 	
 	private RegistroPeliculas() {}
 	
-	public RegistroPeliculas getRegistroPeliculas() {
+	public static RegistroPeliculas getRegistroPeliculas() {
 		if (elRegistroPeliculas == null) elRegistroPeliculas = new RegistroPeliculas();
 		return elRegistroPeliculas;
 	}
 	
-	public Pelicula buscarActor(String pNombre) {
+	public Pelicula buscarPelicula(String pNombre) {
 		return pelis.buscarPelicula(pNombre);		
 	}
 

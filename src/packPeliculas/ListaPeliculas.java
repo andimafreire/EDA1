@@ -13,13 +13,12 @@ public class ListaPeliculas {
 	private Iterator<Pelicula> getIterador() {return lista.iterator();}
 	
 	public Pelicula buscarPelicula(String pNombre) {
-		Pelicula peli = new Pelicula(pNombre);
 		Pelicula p = null;
 		Boolean esta = false;
 		Iterator<Pelicula> itr = this.getIterador();
 		while (itr.hasNext() && !esta) {
 			p = itr.next();
-			if (p.compareTo(peli)==0)
+			if (p.equals(pNombre))
 				esta=true;
 		}
 		return p;

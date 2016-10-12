@@ -8,13 +8,13 @@ import java.util.Iterator;
 
 public class RegistroActores {
 	private Map<String, Actor> mapaActores;
-	private RegistroActores elRegistroActores;
+	private static RegistroActores elRegistroActores;
 
 	private RegistroActores() {
 		mapaActores = new HashMap<>();
 	}
 
-	public RegistroActores getRegistroActores() {
+	public static RegistroActores getRegistroActores() {
 		if (elRegistroActores == null)
 			elRegistroActores = new RegistroActores();
 		return elRegistroActores;
@@ -26,7 +26,19 @@ public class RegistroActores {
 
 	public void anadirActor(Actor a) {
 		String nombre = a.getApellido() + a.getNombre();
-		mapaActores.put(nombre, a);
+		if (!mapaActores.containsKey(nombre)){
+			mapaActores.put(nombre, a);
+		System.out.println("El actor "+a.getNombre()+" "+a.getApellido()+" ha sido añadido con exito");
+		}
+		else System.out.println("El actor "+a.getNombre()+" "+a.getApellido()+" ya se encontraba en la lista");
+	}
+	
+	public void eliminarActor(String pApeNom) {
+		if(mapaActores.containsKey(pApeNom)) {
+			mapaActores.remove(pApeNom);
+			System.out.println("El actor ha sido eliminado con exito");
+		}
+		else System.out.println("El actor no se encontraba en la lista");
 	}
 
 	public void ListaOrdenadaActores() { //coste n para volcado + n*log2 (n) para ordenacion + n para imprimir
