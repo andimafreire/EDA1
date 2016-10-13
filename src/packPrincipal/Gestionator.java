@@ -19,34 +19,79 @@ public class Gestionator {
 	
 	private Gestionator() {}
 	
-	public static void main(String[] args) {
-		System.out.println("seleccione operacion:");
+	public void main(String[] args) {
+		menu();		
+	}
+	
+	private void menu() {
+		System.out.println("Seleccione operacion:");
 		System.out.println();
-		System.out.println(" 1. cargar fichero ");
-		System.out.println(" 2. buscar un actor ");
-		System.out.println(" 3. insertar un actor ");
-		System.out.println(" 4. mostrar peliculas rodadas por un actor ");
-		System.out.println(" 5. mostrar actores de una pelicula ");
-		System.out.println(" 6. incrementar la recaudacion de una pelicula ");
-		System.out.println(" 7. borrar actor ");
-		System.out.println(" 8. exportar registro de peliculas a fichero ");
-		System.out.println(" 9. obtener lista ordenada de actores ");
+		System.out.println(" 1. Cargar fichero ");
+		System.out.println(" 2. Buscar un actor ");
+		System.out.println(" 3. Insertar un actor ");
+		System.out.println(" 4. Mostrar peliculas rodadas por un actor ");
+		System.out.println(" 5. Mostrar actores de una pelicula ");
+		System.out.println(" 6. Incrementar la recaudacion de una pelicula ");
+		System.out.println(" 7. Borrar actor ");
+		System.out.println(" 8. Exportar registro de peliculas a fichero ");
+		System.out.println(" 9. Obtener lista ordenada de actores ");
 		System.out.println();
 		System.out.println("------------------------------------------------------------");
 		int seleccion;
 		Scanner sc = new Scanner(System.in);
 		seleccion=sc.nextInt();
 		
-		
-		
+		switch (seleccion) {
+	    
+	    case 1:
+	      cargarLista();
+	      menu();
+	      break;
+	    case 2:
+	      buscarActor();  
+	      menu();
+	      break;
+	    case 3:
+	      insertarActor();
+	      menu();
+	      break;
+	    case 4:
+	      escribirPeliculasActor();
+	      menu();
+	      break;
+	    case 5:
+	      imprimirActoresPelicula();
+	      menu();
+	      break;
+	    case 6:
+	      incrementarRecaudacion();
+	      menu();
+	      break;
+	    case 7:
+	      borrarActor();
+	      menu();
+	      break;
+	    case 8:
+	      exportarLista();
+	      menu();
+	      break;
+	    case 9:
+	      obtenerListaOrdenadaActores();
+	      menu();
+	      break;
+	    default:
+	      System.out.println("El número introducido no está en el rango");
+	      menu();
+	      break;
+	    }
+		sc.close();
 	}
-	
 	public Gestionator getGestionator() {
 		if (elGestionator == null) elGestionator = new Gestionator();
 		return elGestionator;			
 	}
 	
-	public void cargarLista(String nomF){
+	public void cargarLista(){
 		Pelicula peli;
 		Actor act;
 		String nombre,apellido;
@@ -54,7 +99,7 @@ public class Gestionator {
 		RegistroPeliculas regPeli = RegistroPeliculas.getRegistroPeliculas();
 		String[] sepPeliDeActor, listaActores, nombreCompleto;
 		   try{
-			  BufferedReader buff = new BufferedReader(new FileReader(nomF));
+			  BufferedReader buff = new BufferedReader(new FileReader("/EDA1/documentos/archivos"));
 		      String linea = buff.readLine();
 		      Pattern patt1 = Pattern.compile("\\s+--->\\s+");
 		      Pattern patt2 = Pattern.compile("\\s+&&&\\s+");
@@ -97,34 +142,38 @@ public class Gestionator {
 		Scanner sc = new Scanner(System.in);
 		String apeNom = sc.nextLine();
 		Actor a = RegistroActores.getRegistroActores().buscarActor(apeNom);
-		if (a!=null) System.out.println("el actor ha sido encontrado");
-		else System.out.println("el actor no ha sido encontrado");
+		if (a!=null) System.out.println("El actor ha sido encontrado");
+		else System.out.println("El actor no ha sido encontrado");
+		sc.close();
 	}
 
 	private void insertarActor() {
-		System.out.println("introduce el apellido del actor");
+		System.out.println("Introduce el apellido del actor");
 		Scanner sc = new Scanner(System.in);
 		String ape = sc.nextLine();
-		System.out.println("introduce el nombre del actor");
+		System.out.println("Introduce el nombre del actor");
 		String nom = sc.nextLine();
 		Actor a = new Actor(ape,nom);
 		RegistroActores.getRegistroActores().anadirActor(a);
+		sc.close();
 	}
 	
 	private void borrarActor() {
-		System.out.println("introduce el nombre del actor (apellido y despues nombre sin espacios");
+		System.out.println("Introduce el nombre del actor (apellido y después nombre sin espacios");
 		Scanner sc = new Scanner(System.in);
 		String apeNom = sc.nextLine();
 		RegistroActores.getRegistroActores().eliminarActor(apeNom);
+		sc.close();
 	}
 	
 	private void escribirPeliculasActor() {
-		System.out.println("introduce el nombre del actor (apellido y despues nombre sin espacios");
+		System.out.println("introduce el nombre del actor (apellido y después nombre sin espacios");
 		Scanner sc = new Scanner(System.in);
 		String apeNom = sc.nextLine();
 		Actor a = RegistroActores.getRegistroActores().buscarActor(apeNom);
 		if (a!=null) a.imprimirPeliculas();
-		else System.out.println("el actor no ha sido encontrado");
+		else System.out.println("El actor no ha sido encontrado");
+		sc.close();
 	}
 	
 	private void imprimirActoresPelicula() {
@@ -134,19 +183,21 @@ public class Gestionator {
 		Pelicula peli = RegistroPeliculas.getRegistroPeliculas().buscarPelicula(nombre);
 		if (peli!=null) peli.imprimirActores();	
 		else System.out.println("la pelicula no ha sido encontrada");
+		sc.close();
 	}
 	
 	private void incrementarRecaudacion() {
-		System.out.println("introduce el nombre de la pelicula");
+		System.out.println("Introduce el nombre de la pelicula");
 		Scanner sc = new Scanner(System.in);
 		String nombre = sc.nextLine();
 		Pelicula peli = RegistroPeliculas.getRegistroPeliculas().buscarPelicula(nombre);	
 		if (peli!=null) {
-			System.out.println("introduce la recaudacion a incrementar");
+			System.out.println("Introduce la recaudacion a incrementar");
 			Double recau = sc.nextDouble();
 			peli.incrementarRecaudacion(recau);
 		}
-		else System.out.println("la pelicula no ha sido encontrada");
+		else System.out.println("La pelicula no ha sido encontrada");
+		sc.close();
 	}
 	
 	private void obtenerListaOrdenadaActores() {
