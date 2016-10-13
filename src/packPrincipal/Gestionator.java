@@ -130,12 +130,29 @@ public class Gestionator {
 		   catch(IOException e) {e.printStackTrace();}
 		}
 	
+
 	private void exportarLista() {
 		RegistroPeliculas regPelis = RegistroPeliculas.getRegistroPeliculas();
 		try { 
-			BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
-		}
+			BufferedWriter bw = new BufferedWriter(new FileWriter("/EDA1/documentos/archivos/fichero_resultado"));
+			Pelicula peli;
+			for (int i = 0; i < regPelis.getPelis().obtenerNumPeliculas(); i++) { 
+				peli = regPelis.getPelis().obtenerPeliEnPos(i);
+				bw.write(peli.getNombre()+" ---> ");
+				for (int j = 0; j < peli.getActores().size()-1; j++) {
+					bw.write(peli.getActores().get(j).getApellido()+", "+peli.getActores().get(j).getNombre());
+					bw.write(" &&& ");
+				}
+				bw.write(peli.getActores().get(peli.getActores().size()-1).getApellido()+", "+
+						peli.getActores().get(peli.getActores().size()-1).getNombre());
+				bw.flush();
+				bw.newLine();
+			}
+			bw.close(); 
+			} 
+		catch (IOException e) { e.printStackTrace();}
 	}
+	
 	
 	private void buscarActor() {
 		System.out.println("introduce el nombre del actor (apellido y despues nombre sin espacios");

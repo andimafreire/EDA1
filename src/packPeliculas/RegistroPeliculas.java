@@ -18,5 +18,7 @@ public class RegistroPeliculas {
 	public void anadirPelicula (Pelicula pPeli) {
 		pelis.anadirPelicula(pPeli);
 	}
-
+	public ListaPeliculas getPelis() {
+		return pelis;
+	}
 }

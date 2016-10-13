@@ -15,6 +15,8 @@ public class Pelicula {
 		this.recaudacion=0;
 	}
 	
+	public String getNombre() {return this.nombre;}
+	public ArrayList<Actor> getActores() {return this.actores;}
 	public void incrementarRecaudacion(Double pRec) {
 		this.recaudacion = this.recaudacion + pRec;
 		System.out.println("recaudacion incrementada a "+this.recaudacion+"€");

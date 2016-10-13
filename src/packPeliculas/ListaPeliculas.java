@@ -42,4 +42,6 @@ public class ListaPeliculas {
 	}
 
 	public int obtenerNumPeliculas() {return lista.size();}
+	public Pelicula obtenerPeliEnPos(int pPos) {return lista.get(pPos);}
+	
 }
