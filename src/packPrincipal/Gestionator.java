@@ -90,7 +90,7 @@ public class Gestionator {
 		RegistroPeliculas regPeli = RegistroPeliculas.getRegistroPeliculas();
 		String[] sepPeliDeActor, listaActores;
 		   try{
-			  BufferedReader buff = new BufferedReader(new FileReader("C:/workspaceJava/EDA1/documentos/archivos/FilmsActors20162017.txt"));
+			  BufferedReader buff = new BufferedReader(new FileReader("C:/workspaceEclipse/EDA1/documentos/archivos/FilmsActors20162017.txt"));
 		      String linea = buff.readLine();
 		      Pattern patt1 = Pattern.compile("\\s+--->\\s+");
 		      Pattern patt2 = Pattern.compile("\\s+&&&\\s+");
@@ -121,9 +121,10 @@ public class Gestionator {
 		}
 	
 	private static void exportarLista() {
+		StopWatch sw = new StopWatch();
 		RegistroPeliculas regPelis = RegistroPeliculas.getRegistroPeliculas();
 		try { 
-			BufferedWriter bw = new BufferedWriter(new FileWriter("C:/workspaceJava/EDA1/documentos/archivos/fichero_resultado.txt"));
+			BufferedWriter bw = new BufferedWriter(new FileWriter("C:/workspaceEclipse/EDA1/documentos/archivos/resultado.txt"));
 			Pelicula peli;
 			for (int i = 0; i < regPelis.getPelis().obtenerNumPeliculas(); i++) { 
 				peli = regPelis.getPelis().obtenerPeliEnPos(i);
@@ -139,6 +140,7 @@ public class Gestionator {
 			bw.close(); 
 			} 
 		catch (IOException e) { e.printStackTrace();}
+		System.out.println(sw.elapsedTime());
 	}
 	
 	private static void buscarActor() {
@@ -149,7 +151,7 @@ public class Gestionator {
 		Actor a = RegistroActores.getRegistroActores().buscarActor(apeNom);
 		if (a!=null) System.out.println("El actor ha sido encontrado");
 		else System.out.println("El actor no ha sido encontrado");
-		sw.elapsedTime();
+		System.out.println(sw.elapsedTime());
 	}
 
 	private static void insertarActor() {
@@ -159,7 +161,7 @@ public class Gestionator {
 		String nom = sc.nextLine();
 		Actor a = new Actor(nom);
 		RegistroActores.getRegistroActores().anadirActor(a);
-		sw.elapsedTime();
+		System.out.println(sw.elapsedTime());
 	}
 	
 	private static void borrarActor() {
@@ -168,7 +170,7 @@ public class Gestionator {
 		Scanner sc = new Scanner(System.in);
 		String apeNom = sc.nextLine();
 		RegistroActores.getRegistroActores().eliminarActor(apeNom);
-		sw.elapsedTime();
+		System.out.println(sw.elapsedTime());
 	}
 	
 	private static void escribirPeliculasActor() {
@@ -179,7 +181,7 @@ public class Gestionator {
 		Actor a = RegistroActores.getRegistroActores().buscarActor(apeNom);
 		if (a!=null) a.imprimirPeliculas();
 		else System.out.println("El actor no ha sido encontrado");
-		sw.elapsedTime();
+		System.out.println(sw.elapsedTime());
 	}
 	
 	private static void imprimirActoresPelicula() {
@@ -190,7 +192,7 @@ public class Gestionator {
 		Pelicula peli = RegistroPeliculas.getRegistroPeliculas().buscarPelicula(nombre);
 		if (peli!=null) peli.imprimirseCompleto();	
 		else System.out.println("la pelicula no ha sido encontrada");
-		sw.elapsedTime();
+		System.out.println(sw.elapsedTime());
 	}
 	
 	private static void incrementarRecaudacion() {
@@ -205,12 +207,12 @@ public class Gestionator {
 			peli.incrementarRecaudacion(recau);
 		}
 		else System.out.println("La pelicula no ha sido encontrada");
-		sw.elapsedTime();
+		System.out.println(sw.elapsedTime());
 	}
 	
 	private static void obtenerListaOrdenadaActores() {
 		StopWatch sw = new StopWatch();
 		RegistroActores.getRegistroActores().ListaOrdenadaActores();
-		sw.elapsedTime();
+		System.out.println(sw.elapsedTime());
 	}
 }
