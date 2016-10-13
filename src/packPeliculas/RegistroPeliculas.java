@@ -14,5 +14,9 @@ public class RegistroPeliculas {
 	public Pelicula buscarPelicula(String pNombre) {
 		return pelis.buscarPelicula(pNombre);		
 	}
+	
+	public void anadirPelicula (Pelicula pPeli) {
+		pelis.anadirPelicula(pPeli);
+	}
 
 }

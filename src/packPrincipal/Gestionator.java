@@ -1,8 +1,13 @@
 package packPrincipal;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import packActor.Actor;
 import packActor.RegistroActores;
@@ -42,20 +47,49 @@ public class Gestionator {
 	}
 	
 	public void cargarLista(String nomF){
+		Pelicula peli;
+		Actor act;
+		String nombre,apellido;
+		RegistroActores regAct = RegistroActores.getRegistroActores();
+		RegistroPeliculas regPeli = RegistroPeliculas.getRegistroPeliculas();
+		String[] sepPeliDeActor, listaActores, nombreCompleto;
 		   try{
-		      Scanner entrada = new Scanner(new FileReader(nomF));
-		      String linea;
-		      while (entrada.hasNext()) {
-		         linea = entrada.nextLine();
-		         //TODO Lo que se implemente
+			  BufferedReader buff = new BufferedReader(new FileReader(nomF));
+		      String linea = buff.readLine();
+		      Pattern patt1 = Pattern.compile("\\s+--->\\s+");
+		      Pattern patt2 = Pattern.compile("\\s+&&&\\s+");
+		      Pattern patt3 = Pattern.compile("\\s+,\\s+");
+		      while (linea!=null) {
+		    	  sepPeliDeActor = patt1.split(linea);
+		    	  peli = new Pelicula(sepPeliDeActor[0]);
+		    	  regPeli.anadirPelicula(peli);
+		    	  listaActores = patt2.split(sepPeliDeActor[1]);
+		    	  for (int i = 0; i < listaActores.length; i++) {
+		    		  nombreCompleto = patt3.split(listaActores[i]);
+		    		  apellido = nombreCompleto[0];
+		    		  nombre = nombreCompleto[1];
+		    		  act = regAct.buscarActor(apellido+nombre);
+		    		  if (act==null) {
+		    			  act = new Actor(apellido, nombre);
+		    			  regAct.anadirActor(act);
+		    		  }
+		    		  peli.anadirActor(act);
+		    		  act.anadirPelicula(peli);  
+		    	  }    
 		      }
-		      entrada.close();
+		      buff.close();
+		   }
+		   catch (FileNotFoundException e){
+			   System.out.println("El fichero no ha sido encontrado");
 		   }
 		   catch(IOException e) {e.printStackTrace();}
 		}
 	
 	private void exportarLista() {
-		
+		RegistroPeliculas regPelis = RegistroPeliculas.getRegistroPeliculas();
+		try { 
+			BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
+		}
 	}
 	
 	private void buscarActor() {
