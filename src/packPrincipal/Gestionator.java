@@ -92,6 +92,7 @@ public class Gestionator {
 	}
 	
 	public void cargarLista(){
+		StopWatch sw = new StopWatch();
 		Pelicula peli;
 		Actor act;
 		String nombre,apellido;
@@ -128,9 +129,9 @@ public class Gestionator {
 			   System.out.println("El fichero no ha sido encontrado");
 		   }
 		   catch(IOException e) {e.printStackTrace();}
+		sw.elapsedTime();
 		}
 	
-
 	private void exportarLista() {
 		RegistroPeliculas regPelis = RegistroPeliculas.getRegistroPeliculas();
 		try { 
@@ -153,8 +154,8 @@ public class Gestionator {
 		catch (IOException e) { e.printStackTrace();}
 	}
 	
-	
 	private void buscarActor() {
+		StopWatch sw = new StopWatch();
 		System.out.println("introduce el nombre del actor (apellido y despues nombre sin espacios");
 		Scanner sc = new Scanner(System.in);
 		String apeNom = sc.nextLine();
@@ -162,9 +163,11 @@ public class Gestionator {
 		if (a!=null) System.out.println("El actor ha sido encontrado");
 		else System.out.println("El actor no ha sido encontrado");
 		sc.close();
+		sw.elapsedTime();
 	}
 
 	private void insertarActor() {
+		StopWatch sw = new StopWatch();
 		System.out.println("Introduce el apellido del actor");
 		Scanner sc = new Scanner(System.in);
 		String ape = sc.nextLine();
@@ -173,17 +176,21 @@ public class Gestionator {
 		Actor a = new Actor(ape,nom);
 		RegistroActores.getRegistroActores().anadirActor(a);
 		sc.close();
+		sw.elapsedTime();
 	}
 	
 	private void borrarActor() {
+		StopWatch sw = new StopWatch();
 		System.out.println("Introduce el nombre del actor (apellido y después nombre sin espacios");
 		Scanner sc = new Scanner(System.in);
 		String apeNom = sc.nextLine();
 		RegistroActores.getRegistroActores().eliminarActor(apeNom);
 		sc.close();
+		sw.elapsedTime();
 	}
 	
 	private void escribirPeliculasActor() {
+		StopWatch sw = new StopWatch();
 		System.out.println("introduce el nombre del actor (apellido y después nombre sin espacios");
 		Scanner sc = new Scanner(System.in);
 		String apeNom = sc.nextLine();
@@ -191,9 +198,11 @@ public class Gestionator {
 		if (a!=null) a.imprimirPeliculas();
 		else System.out.println("El actor no ha sido encontrado");
 		sc.close();
+		sw.elapsedTime();
 	}
 	
 	private void imprimirActoresPelicula() {
+		StopWatch sw = new StopWatch();
 		System.out.println("introduce el nombre de la pelicula");
 		Scanner sc = new Scanner(System.in);
 		String nombre = sc.nextLine();
@@ -201,9 +210,11 @@ public class Gestionator {
 		if (peli!=null) peli.imprimirActores();	
 		else System.out.println("la pelicula no ha sido encontrada");
 		sc.close();
+		sw.elapsedTime();
 	}
 	
 	private void incrementarRecaudacion() {
+		StopWatch sw = new StopWatch();
 		System.out.println("Introduce el nombre de la pelicula");
 		Scanner sc = new Scanner(System.in);
 		String nombre = sc.nextLine();
@@ -215,9 +226,12 @@ public class Gestionator {
 		}
 		else System.out.println("La pelicula no ha sido encontrada");
 		sc.close();
+		sw.elapsedTime();
 	}
 	
 	private void obtenerListaOrdenadaActores() {
+		StopWatch sw = new StopWatch();
 		RegistroActores.getRegistroActores().ListaOrdenadaActores();
+		sw.elapsedTime();
 	}
 }
