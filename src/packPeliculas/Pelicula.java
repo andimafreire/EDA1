@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import packActor.Actor;
-import packActor.ListaActores;
 
 public class Pelicula {
 	private String nombre;
 	private ArrayList<Actor> actores;
-	private int recaudacion;
+	private double recaudacion;
 	
 	public Pelicula(String pNombre) {
 		this.nombre=pNombre;
 		this.recaudacion=0;
 	}
 	
-	public void incrementarRecaudacion(int pRec) {
+	public void incrementarRecaudacion(Double pRec) {
 		this.recaudacion = this.recaudacion + pRec;
+		System.out.println("recaudacion incrementada a "+this.recaudacion+"€");
 	}
 	
 	public void anadirActor (Actor a) {

@@ -94,6 +94,7 @@ public class Gestionator {
 	}
 	
 	private void imprimirActoresPelicula() {
+		System.out.println("introduce el nombre de la pelicula");
 		Scanner sc = new Scanner(System.in);
 		String nombre = sc.nextLine();
 		Pelicula peli = RegistroPeliculas.getRegistroPeliculas().buscarPelicula(nombre);
@@ -102,7 +103,16 @@ public class Gestionator {
 	}
 	
 	private void incrementarRecaudacion() {
-		
+		System.out.println("introduce el nombre de la pelicula");
+		Scanner sc = new Scanner(System.in);
+		String nombre = sc.nextLine();
+		Pelicula peli = RegistroPeliculas.getRegistroPeliculas().buscarPelicula(nombre);	
+		if (peli!=null) {
+			System.out.println("introduce la recaudacion a incrementar");
+			Double recau = sc.nextDouble();
+			peli.incrementarRecaudacion(recau);
+		}
+		else System.out.println("la pelicula no ha sido encontrada");
 	}
 	
 	private void obtenerListaOrdenadaActores() {

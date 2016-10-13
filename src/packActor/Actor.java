@@ -48,6 +48,8 @@ public class Actor implements Comparable<Actor> {
 
 	@Override
 	public int compareTo(Actor a) {
-		return this.nombre.compareTo(a.nombre) + this.apellido.compareTo(a.apellido);
+		int i = this.nombre.compareTo(a.nombre);
+		if (i==0) return this.apellido.compareTo(a.apellido);
+		else return i;
 	}
 }
