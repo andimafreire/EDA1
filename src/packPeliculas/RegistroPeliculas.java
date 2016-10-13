@@ -4,7 +4,9 @@ public class RegistroPeliculas {
 	private ListaPeliculas pelis;
 	private static RegistroPeliculas elRegistroPeliculas;
 	
-	private RegistroPeliculas() {}
+	private RegistroPeliculas() {
+		this.pelis = new ListaPeliculas();
+	}
 	
 	public static RegistroPeliculas getRegistroPeliculas() {
 		if (elRegistroPeliculas == null) elRegistroPeliculas = new RegistroPeliculas();

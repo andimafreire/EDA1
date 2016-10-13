@@ -18,10 +18,11 @@ public class ListaPeliculas {
 		Iterator<Pelicula> itr = this.getIterador();
 		while (itr.hasNext() && !esta) {
 			p = itr.next();
-			if (p.equals(pNombre))
+			if (p.getNombre().equals(pNombre))
 				esta=true;
 		}
-		return p;
+		if (esta) return p;
+		else return null;
 	}
 	
 	public boolean esta(Pelicula pPeli) {

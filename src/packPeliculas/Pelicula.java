@@ -8,16 +8,17 @@ import packActor.Actor;
 public class Pelicula {
 	private String nombre;
 	private ArrayList<Actor> actores;
-	private double recaudacion;
+	private int recaudacion;
 	
 	public Pelicula(String pNombre) {
 		this.nombre=pNombre;
 		this.recaudacion=0;
+		this.actores = new ArrayList<Actor>();
 	}
 	
 	public String getNombre() {return this.nombre;}
 	public ArrayList<Actor> getActores() {return this.actores;}
-	public void incrementarRecaudacion(Double pRec) {
+	public void incrementarRecaudacion(int pRec) {
 		this.recaudacion = this.recaudacion + pRec;
 		System.out.println("recaudacion incrementada a "+this.recaudacion+"€");
 	}
@@ -26,15 +27,18 @@ public class Pelicula {
 		if (!actores.contains(a))
 			actores.add(a);
 	}
-	
 	public void imprimirse() {
 		System.out.println("Nombre de la película: " + this.nombre);
+	}
+	public void imprimirseCompleto() {
+		System.out.println("Nombre de la película: " + this.nombre);
 		System.out.println();
-		System.out.println("Recaudación de la película: " + this.recaudacion);
+		System.out.println("Recaudación de la película: " + this.recaudacion+"€");
 		System.out.println();
 		System.out.println("Actores del reparto: ");
 		imprimirActores();
 		}
+	
 	
 	private Iterator<Actor> getIterador() {return actores.iterator();}
 	

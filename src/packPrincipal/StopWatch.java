@@ -16,4 +16,7 @@ public class StopWatch {
         long now = System.currentTimeMillis();
         return (now - start);
     }
+    public void imprimirTiempo(){
+    	System.out.println(start);
+    }
 } 

@@ -25,12 +25,9 @@ public class RegistroActores {
 	}
 
 	public void anadirActor(Actor a) {
-		String nombre = a.getApellido() + a.getNombre();
-		if (!mapaActores.containsKey(nombre)){
-			mapaActores.put(nombre, a);
-		System.out.println("El actor "+a.getNombre()+" "+a.getApellido()+" ha sido añadido con exito");
+		if (!mapaActores.containsKey(a.getNombre())){
+			mapaActores.put(a.getNombre(), a);
 		}
-		else System.out.println("El actor "+a.getNombre()+" "+a.getApellido()+" ya se encontraba en la lista");
 	}
 	
 	public void eliminarActor(String pApeNom) {
