@@ -38,7 +38,7 @@ public class RegistroActores {
 		else System.out.println("El actor no se encontraba en la lista");
 	}
 
-	public void ListaOrdenadaActores() { //coste n para volcado + n*log2 (n) para ordenacion + n para imprimir
+	public void ListaOrdenadaActores() {
 		ArrayList<Actor> lista = new ArrayList<Actor>(mapaActores.values());
 		quickSort(lista, 0, lista.size() - 1);
 		imprimirActores(lista);

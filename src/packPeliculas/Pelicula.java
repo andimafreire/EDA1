@@ -20,7 +20,7 @@ public class Pelicula {
 	public ArrayList<Actor> getActores() {return this.actores;}
 	public void incrementarRecaudacion(int pRec) {
 		this.recaudacion = this.recaudacion + pRec;
-		System.out.println("recaudacion incrementada a "+this.recaudacion+"€");
+		System.out.println("Recaudacion incrementada a "+this.recaudacion+"€");
 	}
 	
 	public void anadirActor (Actor a) {

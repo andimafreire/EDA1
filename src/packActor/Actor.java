@@ -33,7 +33,7 @@ public class Actor implements Comparable<Actor> {
 	public void imprimirPeliculas() {
 		this.imprimirse();
 		if (susPeliculas.obtenerNumPeliculas() > 0) {
-			System.out.println("ha aparecido en las siguientes películas");
+			System.out.println("Ha aparecido en las siguientes películas");
 			this.susPeliculas.imprimirPeliculas();
 		} else
 			System.out.println("No ha aparecido en ninguna película");
