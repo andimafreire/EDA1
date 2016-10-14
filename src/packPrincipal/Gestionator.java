@@ -16,11 +16,12 @@ import packPeliculas.RegistroPeliculas;
 
 public class Gestionator {
 	private Gestionator elGestionator;
+	static boolean ficheroCargado = false;
 	
 	private Gestionator() {}
 	
 	public static void main(String[] args) {
-		menu();		
+		menu();
 	}
 	
 	private static void menu() {
@@ -44,8 +45,11 @@ public class Gestionator {
 		switch (seleccion) {
 	    
 	    case 1:
-	      cargarLista();
-	      System.out.println("terminado");
+	      if (!ficheroCargado){
+	    	   cargarLista();
+	    	   System.out.println("fichero cargado terminado");
+	    	   ficheroCargado = true;
+	      } else System.out.println("fichero ya habia sido cargado");
 	      break;
 	    case 2:
 	      buscarActor();  
@@ -90,7 +94,7 @@ public class Gestionator {
 		RegistroPeliculas regPeli = RegistroPeliculas.getRegistroPeliculas();
 		String[] sepPeliDeActor, listaActores;
 		   try{
-			  BufferedReader buff = new BufferedReader(new FileReader("C:/workspaceEclipse/EDA1/documentos/archivos/FilmsActors20162017.txt"));
+			  BufferedReader buff = new BufferedReader(new FileReader("C:/workspaceJava/EDA1/documentos/archivos/FilmsActors20162017Small.txt"));
 		      String linea = buff.readLine();
 		      Pattern patt1 = Pattern.compile("\\s+--->\\s+");
 		      Pattern patt2 = Pattern.compile("\\s+&&&\\s+");
@@ -144,10 +148,10 @@ public class Gestionator {
 	}
 	
 	private static void buscarActor() {
-		StopWatch sw = new StopWatch();
 		System.out.println("introduce el nombre completo del actor");
 		Scanner sc = new Scanner(System.in);
 		String apeNom = sc.nextLine();
+		StopWatch sw = new StopWatch();
 		Actor a = RegistroActores.getRegistroActores().buscarActor(apeNom);
 		if (a!=null) System.out.println("El actor ha sido encontrado");
 		else System.out.println("El actor no ha sido encontrado");
@@ -155,29 +159,29 @@ public class Gestionator {
 	}
 
 	private static void insertarActor() {
-		StopWatch sw = new StopWatch();
 		System.out.println("Introduce el nombre completo del actor");
 		Scanner sc = new Scanner(System.in);
 		String nom = sc.nextLine();
+		StopWatch sw = new StopWatch();
 		Actor a = new Actor(nom);
 		RegistroActores.getRegistroActores().anadirActor(a);
 		System.out.println(sw.elapsedTime());
 	}
 	
 	private static void borrarActor() {
-		StopWatch sw = new StopWatch();
 		System.out.println("Introduce el nombre completo del actor");
 		Scanner sc = new Scanner(System.in);
 		String apeNom = sc.nextLine();
+		StopWatch sw = new StopWatch();
 		RegistroActores.getRegistroActores().eliminarActor(apeNom);
 		System.out.println(sw.elapsedTime());
 	}
 	
 	private static void escribirPeliculasActor() {
-		StopWatch sw = new StopWatch();
 		System.out.println("introduce el nombre completo del actor");
 		Scanner sc = new Scanner(System.in);
 		String apeNom = sc.nextLine();
+		StopWatch sw = new StopWatch();
 		Actor a = RegistroActores.getRegistroActores().buscarActor(apeNom);
 		if (a!=null) a.imprimirPeliculas();
 		else System.out.println("El actor no ha sido encontrado");
@@ -185,10 +189,10 @@ public class Gestionator {
 	}
 	
 	private static void imprimirActoresPelicula() {
-		StopWatch sw = new StopWatch();
 		System.out.println("introduce el nombre de la pelicula");
 		Scanner sc = new Scanner(System.in);
 		String nombre = sc.nextLine();
+		StopWatch sw = new StopWatch();
 		Pelicula peli = RegistroPeliculas.getRegistroPeliculas().buscarPelicula(nombre);
 		if (peli!=null) peli.imprimirseCompleto();	
 		else System.out.println("la pelicula no ha sido encontrada");
@@ -196,18 +200,19 @@ public class Gestionator {
 	}
 	
 	private static void incrementarRecaudacion() {
-		StopWatch sw = new StopWatch();
 		System.out.println("Introduce el nombre de la pelicula");
 		Scanner sc = new Scanner(System.in);
 		String nombre = sc.nextLine();
+		StopWatch sw = new StopWatch();
 		Pelicula peli = RegistroPeliculas.getRegistroPeliculas().buscarPelicula(nombre);	
+		System.out.println(sw.elapsedTime());
 		if (peli!=null) {
 			System.out.println("Introduce la recaudacion a incrementar");
 			int recau = sc.nextInt();
 			peli.incrementarRecaudacion(recau);
 		}
 		else System.out.println("La pelicula no ha sido encontrada");
-		System.out.println(sw.elapsedTime());
+		
 	}
 	
 	private static void obtenerListaOrdenadaActores() {
