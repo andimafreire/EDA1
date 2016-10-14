@@ -22,7 +22,7 @@ public class Gestionator {
 	private Gestionator() {}
 	
 	public static void main(String[] args) {
-		obtenerRuta();
+		menu();
 	}
 	
 	public static void obtenerRuta() {
@@ -31,7 +31,6 @@ public class Gestionator {
 		System.out.println("Si introduce mal la ruta el programa no funcionará y tendrá que reiniciar la aplicación");
 		Scanner sc = new Scanner(System.in);
 		ruta = sc.nextLine();
-		menu();
 	}	
 	
 	private static void menu() {
@@ -56,6 +55,7 @@ public class Gestionator {
 	    
 	    case 1:
 	      if (!ficheroCargado){
+		       obtenerRuta();
 	    	   cargarLista();
 	    	   System.out.println("Fichero cargado");
 	    	   ficheroCargado = true;
@@ -80,6 +80,7 @@ public class Gestionator {
 	      borrarActor();
 	      break;
 	    case 8:
+	      obtenerRuta();
 	      exportarLista();
 	      break;
 	    case 9:
