@@ -4,13 +4,5 @@ public class OrderedCircularLinkedList<T> extends CircularLinkedList<T> implemen
 	
 	public void add(T elem){
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-
-
-
-
-
-
 	}
-
-
 }

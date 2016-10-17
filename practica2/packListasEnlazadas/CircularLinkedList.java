@@ -6,13 +6,13 @@ import java.util.NoSuchElementException;
 public class CircularLinkedList<T> implements ListADT<T> {
 
 	// Atributos
-	protected Node<T> last; // apuntador al ultimo
-	protected String descr;  // descripción
+	protected Node<T> last;  //Apuntador al último
+	protected String descr;  //Descripción
 	protected int count;
 
 	// Constructor
 	public CircularLinkedList() {
-	     last = null;
+	    last = null;
 		descr = "";
 		count = 0;
 	}
@@ -28,21 +28,21 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	public T removeFirst() {
 	// Elimina el primer elemento de la lista
         // Precondición: la lista tiene al menos un elemento
-		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+		// COMPLETAR EL CÓDIGO Y CALCULAR EL COSTE
 
 	}
 
 	public T removeLast() {
 	// Elimina el último elemento de la lista
         // Precondición: la lista tiene al menos un elemento
-			// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+		// COMPLETAR EL CÓDIGO Y CALCULAR EL COSTE
 
-		   }
+	}
 
 
 	public T remove(T elem) {
-	//Elimina un elemento concreto de la lista
-		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+	// Elimina un elemento concreto de la lista
+		// COMPLETAR EL CÓDIGO Y CALCULAR EL COSTE
 	}
 
 	public T first() {
@@ -61,31 +61,26 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
 	public boolean contains(T elem) {
 
-		   }
+		   
+	}
 
 	public T find(T elem) {
-	//Determina si la lista contiene un elemento concreto, y develve su referencia, null en caso de que no esté
-		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+	// Determina si la lista contiene un elemento concreto, y develve su referencia, null en caso de que no esté
+		// COMPLETAR EL CÓDIGO Y CALCULAR EL COSTE
 
 	}
 
-	public boolean isEmpty() 
-	//Determina si la lista está vacía
-	{ return last == null;};
+	public boolean isEmpty() {	//Determina si la lista está vacía
+		return last == null;}
 	
-	public int size() 
-	//Determina el número de elementos de la lista
-	{ return count;};
+	public int size() {			//Determina el número de elementos de la lista
+		return count;}
 	
-	/** Return an iterator to the stack that iterates through the items . */ 
-	   public Iterator<T> iterator() { return new ListIterator(); } 
+	   public Iterator<T> iterator() {return new ListIterator();} 
 
-	   // an iterator, doesn't implement remove() since it's optional 
+	   // An iterator doesn't implement remove() since it's optional 
 	   private class ListIterator implements Iterator<T> { 
-
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-
-
 
 	   } // private class
 		

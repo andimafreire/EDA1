@@ -2,7 +2,7 @@ package packListasEnlazadas;
 
 public class Persona implements Comparable<Persona> {
 	
-	// atributos
+	// Atributos
 	private String name;
     private String dni;
 	
@@ -45,4 +45,4 @@ public class Persona implements Comparable<Persona> {
 		return name + " " + dni;
 	}
 	
-} // end Persona
+}
