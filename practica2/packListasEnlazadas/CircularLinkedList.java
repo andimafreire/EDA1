@@ -6,8 +6,8 @@ import java.util.NoSuchElementException;
 public class CircularLinkedList<T> implements ListADT<T> {
 
 	// Atributos
-	protected Node<T> last;  //Apuntador al último
-	protected String descr;  //Descripción
+	protected Node<T> last;  //Apuntador al ï¿½ltimo
+	protected String descr;  //Descripciï¿½n
 	protected int count;
 
 	// Constructor
@@ -26,23 +26,50 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	}
 
 	public T removeFirst() {
-	// Elimina el primer elemento de la lista
-        // Precondición: la lista tiene al menos un elemento
-		// COMPLETAR EL CÓDIGO Y CALCULAR EL COSTE
+	    // Elimina el primer elemento de la lista
+	    	// PrecondiciÃ³n: la lista tiene al menos un elemento
+	   	 // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+		 Node<T> aux=last.next;
+	   	 if(last!=last.next){   	 
+	   	 last.next=aux.next;
+	   	}   	 
+	   	 else{
+	   		 last=null;   		
+	   	 }
+	   	 return (aux.data);
+	   	 
+	    }
 
+
+	    public T removeLast() {
+	    // Elimina el Ãºltimo elemento de la lista
+	    	// PrecondiciÃ³n: la lista tiene al menos un elemento   	
+		 // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+		Node<T> aux=last;
+		if (last.next!=last){
+	   	 Node<T> act=last.next;
+		
+		
+	   		 while(last!=act.next){
+	   		 act=act.next;   
+			 
+	   		 }
+	   	 act.next=last.next;
+	   	 this.last=act;   	
+	}
+	else{
+	this.last=null;
+	}
+	return (aux.data);
+	   		
 	}
 
-	public T removeLast() {
-	// Elimina el último elemento de la lista
-        // Precondición: la lista tiene al menos un elemento
-		// COMPLETAR EL CÓDIGO Y CALCULAR EL COSTE
 
-	}
 
 
 	public T remove(T elem) {
 	// Elimina un elemento concreto de la lista
-		// COMPLETAR EL CÓDIGO Y CALCULAR EL COSTE
+		// COMPLETAR EL Cï¿½DIGO Y CALCULAR EL COSTE
 	}
 
 	public T first() {
@@ -53,7 +80,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	}
 
 	public T last() {
-	//Da acceso al último elemento de la lista
+	//Da acceso al ï¿½ltimo elemento de la lista
 	      if (isEmpty())
 	          return null;
 	      else return last.data;
@@ -65,15 +92,15 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	}
 
 	public T find(T elem) {
-	// Determina si la lista contiene un elemento concreto, y develve su referencia, null en caso de que no esté
-		// COMPLETAR EL CÓDIGO Y CALCULAR EL COSTE
+	// Determina si la lista contiene un elemento concreto, y develve su referencia, null en caso de que no estï¿½
+		// COMPLETAR EL Cï¿½DIGO Y CALCULAR EL COSTE
 
 	}
 
-	public boolean isEmpty() {	//Determina si la lista está vacía
+	public boolean isEmpty() {	//Determina si la lista estï¿½ vacï¿½a
 		return last == null;}
 	
-	public int size() {			//Determina el número de elementos de la lista
+	public int size() {			//Determina el nï¿½mero de elementos de la lista
 		return count;}
 	
 	   public Iterator<T> iterator() {return new ListIterator();} 
