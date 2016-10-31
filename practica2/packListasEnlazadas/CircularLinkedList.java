@@ -35,6 +35,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		} else {
 			last = null;
 		}
+		count--;
 		return (aux.data);
 
 	}
@@ -56,6 +57,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		} else {
 			this.last = null;
 		}
+		count--;
 		return (aux.data);
 
 	}
@@ -67,11 +69,13 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		while (act.next!=this.last){
 			if (act.next.data.equals(elem)){
 				act.next = act.next.next;
+				count--;
 				return elem;
 			}
 		}
 		if (act.next.data.equals(elem)){
 			act.next = act.next.next;
+			count--;
 			return elem;
 		}
 		return null;
@@ -80,18 +84,14 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
 	public T first() {
 		// Da acceso al primer elemento de la lista
-		if (isEmpty())
-			return null;
-		else
-			return last.next.data;
+		if (isEmpty())return null;
+		else return last.next.data;
 	}
 
 	public T last() {
 		// Da acceso al �ltimo elemento de la lista
-		if (isEmpty())
-			return null;
-		else
-			return last.data;
+		if (isEmpty())return null;
+		else return last.data;
 	}
 
 	public boolean contains(T elem) {
@@ -137,23 +137,27 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
 	// An iterator doesn't implement remove() since it's optional
 	private class ListIterator implements Iterator<T> {
-
+		private Node<T> current = last;
+		private int cont = count;
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			return false;
+			if (current==null)return false;
+			else if (cont<0)return false;
+			else return true;
 		}
 
 		@Override
 		public T next() {
-			// TODO Auto-generated method stub
-			return null;
+			if(!hasNext()) throw new NoSuchElementException();
+			T item = current.next.data;
+			current = current.next;
+			cont--;
+			return item;
 		}
 
 		@Override
 		public void remove() {
-			// TODO Auto-generated method stub
-			
+			throw new UnsupportedOperationException();	
 		}
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
 		
