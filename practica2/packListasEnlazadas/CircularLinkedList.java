@@ -96,6 +96,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	}
 
 	public boolean contains(T elem) {
+		if (last==null)return false;
 		Node<T> act = this.last;
 		while (act.next!=this.last){
 			if (act.next.data.equals(elem)){

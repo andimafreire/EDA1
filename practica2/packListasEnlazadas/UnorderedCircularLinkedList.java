@@ -6,8 +6,14 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 	// Añade un elemento al comienzo
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
 		Node<T> nuevo = new Node<T>(elem);
-		nuevo.next = this.last.next;
-		this.last.next = nuevo;
+		if(last==null) {
+			last = nuevo;
+			nuevo.next = nuevo;
+		}
+		else {
+			nuevo.next = this.last.next;
+			this.last.next = nuevo;
+		}
 		count++;
 	}
 
