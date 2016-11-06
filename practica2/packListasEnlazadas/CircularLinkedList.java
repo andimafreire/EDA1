@@ -50,7 +50,6 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
 			while (last != act.next) {
 				act = act.next;
-
 			}
 			act.next = last.next;
 			this.last = act;
@@ -72,10 +71,12 @@ public class CircularLinkedList<T> implements ListADT<T> {
 				count--;
 				return elem;
 			}
+			else act = act.next;
 		}
 		if (act.next.data.equals(elem)){
 			act.next = act.next.next;
 			count--;
+			last = act;
 			return elem;
 		}
 		return null;
@@ -100,6 +101,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 			if (act.next.data.equals(elem)){
 				return true;
 			}
+			else act = act.next;
 		}
 		if (act.next.data.equals(elem)){
 			return true;
@@ -116,6 +118,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 			if (act.next.data.equals(elem)){
 				return act.next.data;
 			}
+			else act =act.next;
 		}
 		if (act.next.data.equals(elem)){
 			return act.next.data;
@@ -142,7 +145,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		@Override
 		public boolean hasNext() {
 			if (current==null)return false;
-			else if (cont<0)return false;
+			else if (cont<=0)return false;
 			else return true;
 		}
 

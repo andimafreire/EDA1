@@ -8,6 +8,7 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 		Node<T> nuevo = new Node<T>(elem);
 		nuevo.next = this.last.next;
 		this.last.next = nuevo;
+		count++;
 	}
 
 	public void addToRear(T elem) {
@@ -23,6 +24,7 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 			this.last.next = nuevo;
 			this.last=nuevo;	
 		}
+		count++;
 	}
 	
 	public void addAfter(T elem, T target) {
@@ -37,6 +39,8 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 				act.next = nuevo;
 				insertado = true;
 			}
+			else act = act.next;
 		}
+		count++;
 	}
 }
