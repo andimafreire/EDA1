@@ -38,10 +38,10 @@ public class RegistroActores {
 		else System.out.println("El actor no se encontraba en la lista");
 	}
 
-	public void ListaOrdenadaActores() {
+	public ArrayList<Actor> ListaOrdenadaActores() {
 		ArrayList<Actor> lista = new ArrayList<Actor>(mapaActores.values());
 		quickSort(lista, 0, lista.size() - 1);
-		imprimirActores(lista);
+		return lista;
 	}
 
 	private void quickSort(ArrayList<Actor> pLista, int pInicio, int pFinal) {

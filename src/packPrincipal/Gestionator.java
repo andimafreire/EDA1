@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -175,7 +176,8 @@ public class Gestionator {
 	
 	private static void obtenerListaOrdenadaActores() {
 		StopWatch sw = new StopWatch();
-		RegistroActores.getRegistroActores().ListaOrdenadaActores();
+		ArrayList<Actor> lista = RegistroActores.getRegistroActores().ListaOrdenadaActores();
+		RegistroActores.getRegistroActores().imprimirActores(lista);
 		System.out.println(sw.elapsedTime());
 	}
 }
