@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.regex.Pattern;
 
 import packActor.Actor;
@@ -79,11 +80,13 @@ public class RegistroPeliculas {
 			for (int i = 0; i < regPelis.getPelis().obtenerNumPeliculas(); i++) { 
 				peli = regPelis.getPelis().obtenerPeliEnPos(i);
 				bw.write(peli.getNombre()+" ---> ");
-				for (int j = 0; j < peli.getActores().size()-1; j++) {
-					bw.write(peli.getActores().get(j).getNombre());
-					bw.write(" &&& ");
+				Iterator<Actor> itr = peli.getActores().iterator();
+				while (itr.hasNext()) {
+					bw.write(itr.next().getNombre());
+					if(itr.hasNext()){
+						bw.write(" &&& ");
+					}
 				}
-				bw.write(peli.getActores().get(peli.getActores().size()-1).getNombre());
 				bw.flush();
 				bw.newLine();
 			}

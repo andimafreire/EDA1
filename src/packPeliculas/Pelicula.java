@@ -1,23 +1,22 @@
 package packPeliculas;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-
 import packActor.Actor;
+import packListasEnlazadas.UnorderedCircularLinkedList;
 
 public class Pelicula {
 	private String nombre;
-	private ArrayList<Actor> actores;
+	private UnorderedCircularLinkedList<Actor> actores;
 	private int recaudacion;
 	
 	public Pelicula(String pNombre) {
 		this.nombre=pNombre;
 		this.recaudacion=0;
-		this.actores = new ArrayList<Actor>();
+		this.actores = new UnorderedCircularLinkedList<Actor>();
 	}
 	
 	public String getNombre() {return this.nombre;}
-	public ArrayList<Actor> getActores() {return this.actores;}
+	public UnorderedCircularLinkedList<Actor> getActores() {return this.actores;}
 	public void incrementarRecaudacion(int pRec) {
 		this.recaudacion = this.recaudacion + pRec;
 		System.out.println("Recaudacion incrementada a "+this.recaudacion+"€");
@@ -25,7 +24,7 @@ public class Pelicula {
 	
 	public void anadirActor (Actor a) {
 		if (!actores.contains(a))
-			actores.add(a);
+			actores.addToFront(a);
 	}
 	public void imprimirse() {
 		System.out.println("Nombre de la película: " + this.nombre);
