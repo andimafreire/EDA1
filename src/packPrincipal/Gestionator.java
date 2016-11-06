@@ -97,65 +97,12 @@ public class Gestionator {
 		return elGestionator;			
 	}
 	
-	public static void cargarLista(){
-		StopWatch sw = new StopWatch();
-		Pelicula peli;
-		Actor act;
-		RegistroActores regAct = RegistroActores.getRegistroActores();
-		RegistroPeliculas regPeli = RegistroPeliculas.getRegistroPeliculas();
-		String[] sepPeliDeActor, listaActores;
-		   try{
-			  BufferedReader buff = new BufferedReader(new FileReader(ruta));
-		      String linea = buff.readLine();
-		      Pattern patt1 = Pattern.compile("\\s+--->\\s+");
-		      Pattern patt2 = Pattern.compile("\\s+&&&\\s+");
-		      while (linea!=null) {
-		    	  sepPeliDeActor = patt1.split(linea);
-		    	  peli = new Pelicula(sepPeliDeActor[0]);
-		    	  regPeli.anadirPelicula(peli);
-		    	  listaActores = patt2.split(sepPeliDeActor[1]);
-		    	  for (int i = 0; i < listaActores.length; i++) {
-		    		  act = regAct.buscarActor(listaActores[i]);
-		    		  if (act==null) {
-		    			  act = new Actor(listaActores[i]);
-		    			  regAct.anadirActor(act);
-		    		  }
-		    		  peli.anadirActor(act);
-		    		  act.anadirPelicula(peli);  
-		    	  }
-		    	  linea = buff.readLine();
-		      }
-		      buff.close();
-		   }
-		   catch (FileNotFoundException e){
-			   System.out.println("El fichero no ha sido encontrado");
-		   }
-		   catch(IOException e) {e.printStackTrace();}
-		System.out.println(sw.elapsedTime());
-		
-		}
+	private static void cargarLista(){
+		RegistroPeliculas.cargarLista(ruta);
+	}
 	
 	private static void exportarLista() {
-		StopWatch sw = new StopWatch();
-		RegistroPeliculas regPelis = RegistroPeliculas.getRegistroPeliculas();
-		try { 
-			BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
-			Pelicula peli;
-			for (int i = 0; i < regPelis.getPelis().obtenerNumPeliculas(); i++) { 
-				peli = regPelis.getPelis().obtenerPeliEnPos(i);
-				bw.write(peli.getNombre()+" ---> ");
-				for (int j = 0; j < peli.getActores().size()-1; j++) {
-					bw.write(peli.getActores().get(j).getNombre());
-					bw.write(" &&& ");
-				}
-				bw.write(peli.getActores().get(peli.getActores().size()-1).getNombre());
-				bw.flush();
-				bw.newLine();
-			}
-			bw.close(); 
-			} 
-		catch (IOException e) { e.printStackTrace();}
-		System.out.println(sw.elapsedTime());
+		RegistroPeliculas.exportarLista(ruta);
 	}
 	
 	private static void buscarActor() {
