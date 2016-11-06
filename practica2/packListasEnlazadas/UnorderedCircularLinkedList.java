@@ -4,7 +4,7 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 	
 	public void addToFront(T elem) {
 	// Añade un elemento al comienzo
-		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+		// COSTE: Constante O(1)
 		Node<T> nuevo = new Node<T>(elem);
 		if(last==null) {
 			last = nuevo;
@@ -19,7 +19,7 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 
 	public void addToRear(T elem) {
 	// Añade un elemento al final 
-		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+		// COSTE: Constante O(1)
 		Node<T> nuevo = new Node<T>(elem);
 		if (this.last == null) {
 			this.last = nuevo;
@@ -36,6 +36,7 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 	public void addAfter(T elem, T target) {
 	// Añade elem detrás de otro elemento concreto, target, que ya se encuentra en la lista
 		// ¡COMPLETAR OPCIONAL!
+		// COSTE: Lineal O(n)
 		Node<T> nuevo = new Node<T>(elem);
 		Node<T> act = this.last;
 		boolean insertado = false;

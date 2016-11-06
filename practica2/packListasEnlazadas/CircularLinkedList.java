@@ -27,8 +27,8 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
 	public T removeFirst() {
 		// Elimina el primer elemento de la lista
-		// Precondición: la lista tiene al menos un elemento
-		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+		// Precondicion: la lista tiene al menos un elemento
+		// COSTE: Constante O(1)
 		Node<T> aux = last.next;
 		if (last != last.next) {
 			last.next = aux.next;
@@ -43,7 +43,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	public T removeLast() {
 		// Elimina el último elemento de la lista
 		// Precondición: la lista tiene al menos un elemento
-		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+		// COSTE: Lineal O(n)
 		Node<T> aux = last;
 		if (last.next != last) {
 			Node<T> act = last.next;
@@ -63,7 +63,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
 	public T remove(T elem) {
 		// Elimina un elemento concreto de la lista
-		// coste: O(n)
+		// COSTE: Lineal O(n)
 		Node<T> act = this.last;
 		while (act.next!=this.last){
 			if (act.next.data.equals(elem)){
@@ -113,7 +113,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	public T find(T elem) {
 		// Determina si la lista contiene un elemento concreto, y develve su
 		// referencia, null en caso de que no est�
-		// COMPLETAR EL C�DIGO Y CALCULAR EL COSTE
+		// COSTE: Lineal O(n)
 		Node<T> act = this.last;
 		while (act.next!=this.last){
 			if (act.next.data.equals(elem)){
@@ -163,7 +163,6 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		public void remove() {
 			throw new UnsupportedOperationException();	
 		}
-		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
 		
 
 	} // private class
