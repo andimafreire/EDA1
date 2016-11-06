@@ -24,7 +24,7 @@ public class Pelicula {
 	
 	public void anadirActor (Actor a) {
 		if (!actores.contains(a))
-			actores.addToFront(a);
+			actores.addToRear(a);
 	}
 	public void imprimirse() {
 		System.out.println("Nombre de la película: " + this.nombre);
@@ -52,5 +52,9 @@ public class Pelicula {
 
 	public int compareTo(Pelicula peli) {
 		return this.nombre.compareTo(peli.nombre);
+	}
+	
+	public void borrarActor(Actor actor) {
+		actores.remove(actor);
 	}
 }

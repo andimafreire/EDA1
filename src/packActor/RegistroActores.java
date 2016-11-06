@@ -32,6 +32,9 @@ public class RegistroActores {
 	
 	public void eliminarActor(String pApeNom) {
 		if(mapaActores.containsKey(pApeNom)) {
+			Actor actor = buscarActor(pApeNom);
+			for (int i=0; i<actor.devolverPeliculas().obtenerNumPeliculas();i++) {
+				actor.devolverPeliculas().obtenerPeliEnPos(i).borrarActor(actor);}
 			mapaActores.remove(pApeNom);
 			System.out.println("El actor ha sido eliminado con exito");
 		}
