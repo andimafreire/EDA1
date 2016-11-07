@@ -11,6 +11,7 @@ public class ListaPeliculas {
 	}
 	
 	private Iterator<Pelicula> getIterador() {return lista.iterator();}
+	public ArrayList<Pelicula> getListaPeliculas() {return lista;}
 	
 	public Pelicula buscarPelicula(String pNombre) {
 		Pelicula p = null;
@@ -40,6 +41,14 @@ public class ListaPeliculas {
 			p = itr.next();
 			p.imprimirse();
 		}
+	}
+	
+	public ArrayList<String> toArrayString() {
+		ArrayList<String> listaStrings = new ArrayList<String>();
+		for (Pelicula p:lista) {
+			listaStrings.add(p.getNombre());
+		}
+		return listaStrings;
 	}
 
 	public int obtenerNumPeliculas() {return lista.size();}

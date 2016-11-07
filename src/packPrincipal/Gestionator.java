@@ -1,14 +1,7 @@
 package packPrincipal;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import packActor.Actor;
 import packActor.RegistroActores;
@@ -18,6 +11,7 @@ import packPeliculas.RegistroPeliculas;
 public class Gestionator {
 	private Gestionator elGestionator;
 	private static boolean ficheroCargado = false;
+	private static boolean grafoCreado = false;
 	private static String ruta;
 	
 	private Gestionator() {}
@@ -46,8 +40,10 @@ public class Gestionator {
 		System.out.println(" 7. Borrar actor ");
 		System.out.println(" 8. Exportar registro de peliculas a fichero ");
 		System.out.println(" 9. Obtener lista ordenada de actores ");
+		System.out.println(" 10. Crear grafo de actores y películas ");
 		System.out.println();
 		System.out.println("------------------------------------------------------------");
+		System.out.println();
 		int seleccion;
 		Scanner sc = new Scanner(System.in);
 		seleccion=sc.nextInt();
@@ -55,7 +51,7 @@ public class Gestionator {
 		switch (seleccion) {
 	    
 	    case 1:
-	      if (!ficheroCargado){
+	    	if (!ficheroCargado){
 		       obtenerRuta();
 	    	   cargarLista();
 	    	   System.out.println("Fichero cargado");
@@ -87,6 +83,17 @@ public class Gestionator {
 	    case 9:
 	      obtenerListaOrdenadaActores();
 	      break;
+	    case 10:
+	    	if (ficheroCargado && !grafoCreado){
+	    		crearGrafo();
+	    		System.out.println("Grafo creado");
+	    		grafoCreado = true;
+		      } else if (!ficheroCargado) {
+		    	  System.out.println("El fichero no se ha cargado aún");
+		      } else if (grafoCreado) {
+		    	  System.out.println("El grafo ya ha sido creado");
+		      }
+		      break;
 	    default:
 	      System.out.println("El número introducido no está en el rango");
 	      break;
@@ -178,6 +185,13 @@ public class Gestionator {
 		StopWatch sw = new StopWatch();
 		ArrayList<Actor> lista = RegistroActores.getRegistroActores().ListaOrdenadaActores();
 		RegistroActores.getRegistroActores().imprimirActores(lista);
+		System.out.println(sw.elapsedTime());
+	}
+	
+	private static void crearGrafo() {
+		StopWatch sw = new StopWatch();
+		RegistroPeliculas.getRegistroPeliculas().crearGrafo();
+		RegistroPeliculas.getRegistroPeliculas().printGrafo();
 		System.out.println(sw.elapsedTime());
 	}
 }

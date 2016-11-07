@@ -11,11 +11,13 @@ import java.util.regex.Pattern;
 
 import packActor.Actor;
 import packActor.RegistroActores;
+import packGrafos.GraphHash;
 import packPrincipal.StopWatch;
 
 public class RegistroPeliculas {
 	private ListaPeliculas pelis;
 	private static RegistroPeliculas elRegistroPeliculas;
+	private GraphHash grafo ;
 	
 	private RegistroPeliculas() {
 		this.pelis = new ListaPeliculas();
@@ -94,5 +96,14 @@ public class RegistroPeliculas {
 			} 
 		catch (IOException e) { e.printStackTrace();}
 		System.out.println(sw.elapsedTime());
+	}
+	
+	public void crearGrafo() {
+		this.grafo = new GraphHash();
+		grafo.crearGrafo(pelis);
+	}
+	
+	public void printGrafo() {
+		grafo.print();
 	}
 }

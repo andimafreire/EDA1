@@ -1,5 +1,7 @@
 package packActor;
 
+import java.util.ArrayList;
+
 import packPeliculas.ListaPeliculas;
 import packPeliculas.Pelicula;
 
@@ -40,8 +42,17 @@ public class Actor implements Comparable<Actor> {
 
 	}
 
+	 public ArrayList<String> peliculasString() {
+		return susPeliculas.toArrayString();
+	}
+	
 	@Override
 	public int compareTo(Actor a) {
 		return this.nombre.compareTo(a.nombre);
 	}
+	
+	@Override
+	  public String toString() {
+	    return nombre.toString();
+	  }
 }

@@ -1,6 +1,9 @@
 package packPeliculas;
 
+import java.util.ArrayList;
+
 import java.util.Iterator;
+
 import packActor.Actor;
 import packListasEnlazadas.UnorderedCircularLinkedList;
 
@@ -17,6 +20,8 @@ public class Pelicula {
 	
 	public String getNombre() {return this.nombre;}
 	public UnorderedCircularLinkedList<Actor> getActores() {return this.actores;}
+	public ArrayList<Actor> getArrayActores() {return this.actores.arrayActores();}
+	
 	public void incrementarRecaudacion(int pRec) {
 		this.recaudacion = this.recaudacion + pRec;
 		System.out.println("Recaudacion incrementada a "+this.recaudacion+"€");
@@ -57,4 +62,9 @@ public class Pelicula {
 	public void borrarActor(Actor actor) {
 		actores.remove(actor);
 	}
+	
+	public ArrayList<String> actoresString() {
+		return actores.toArrayString();
+	}
 }
+   

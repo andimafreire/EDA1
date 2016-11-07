@@ -1,5 +1,7 @@
 package packListasEnlazadas;
 
+import java.util.ArrayList;
+
 public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implements UnorderedListADT<T> {
 	
 	public void addToFront(T elem) {
@@ -49,5 +51,29 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 			else act = act.next;
 		}
 		count++;
+	}
+	
+	public ArrayList<String> toArrayString() {
+		//Pre: La lista no es vacia porque la hemos cargado nosotros
+			// Solo funciona con actores
+		ArrayList<String> lista = new ArrayList<String>();
+		Node<T> act = this.last.next;
+		while (act!=this.last) {
+			lista.add(act.data.toString());
+			act=act.next;
+		}
+		lista.add(last.data.toString());
+		return lista;
+	}
+	
+	public ArrayList<T> arrayActores() {
+		ArrayList<T> lista = new ArrayList<T>();
+		Node<T> act = this.last.next;
+		while (act!=last) {
+			lista.add(act.data);
+			act=act.next;
+		}
+		lista.add(last.data);
+		return lista;
 	}
 }
