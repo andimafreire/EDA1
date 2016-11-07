@@ -191,7 +191,12 @@ public class Gestionator {
 	private static void crearGrafo() {
 		StopWatch sw = new StopWatch();
 		RegistroPeliculas.getRegistroPeliculas().crearGrafo();
-		RegistroPeliculas.getRegistroPeliculas().printGrafo();
+		
+		/*	Hay millones de datos, tarda demasiado en imprimir
+			Usar bajo respondasibilidad propia
+			Hay que hacer un programa de prueba para probarlo sin imprimir
+			
+		RegistroPeliculas.getRegistroPeliculas().printGrafo(); */
 		System.out.println(sw.elapsedTime());
 	}
 }
