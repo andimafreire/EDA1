@@ -106,4 +106,13 @@ public class RegistroPeliculas {
 	public void printGrafo() {
 		grafo.print();
 	}
+	
+	public boolean estanConectadas(String p1, String p2) {
+		return grafo.estanConectadas(p1, p2);
+	}
+	
+	public boolean estaEnGrafo(String p1) {
+		return grafo.contains(p1);
+	}
+	
 }

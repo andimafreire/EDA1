@@ -41,6 +41,7 @@ public class Gestionator {
 		System.out.println(" 8. Exportar registro de peliculas a fichero ");
 		System.out.println(" 9. Obtener lista ordenada de actores ");
 		System.out.println(" 10. Crear grafo de actores y películas ");
+		System.out.println(" 11. Mirar si dos películas están conectadas ");
 		System.out.println();
 		System.out.println("------------------------------------------------------------");
 		System.out.println();
@@ -93,6 +94,15 @@ public class Gestionator {
 		      } else if (grafoCreado) {
 		    	  System.out.println("El grafo ya ha sido creado");
 		      }
+		      break;
+	    case 11:
+	    	if (!ficheroCargado){
+	    		System.out.println("Debes cargar el fichero primero");}
+	    	else if (!grafoCreado) {
+	    		System.out.println("Debes crear el grafo primero");}
+	    	else if (ficheroCargado && grafoCreado) {
+		    	peliculasConectadas();
+	    	}
 		      break;
 	    default:
 	      System.out.println("El número introducido no está en el rango");
@@ -190,13 +200,32 @@ public class Gestionator {
 	
 	private static void crearGrafo() {
 		StopWatch sw = new StopWatch();
-		RegistroPeliculas.getRegistroPeliculas().crearGrafo();
+		RegistroPeliculas.getRegistroPeliculas().crearGrafo();   
 		
-		/*	Hay millones de datos, tarda demasiado en imprimir
-			Usar bajo respondasibilidad propia
-			Hay que hacer un programa de prueba para probarlo sin imprimir
-			
-		RegistroPeliculas.getRegistroPeliculas().printGrafo(); */
+        /*    Hay millones de datos, tarda demasiado en imprimir
+            Usar bajo respondasibilidad propia
+            Hay que hacer un programa de prueba para probarlo sin imprimir
+            
+        RegistroPeliculas.getRegistroPeliculas().printGrafo(); */
+		System.out.println(sw.elapsedTime());
+	}
+	
+	private static void peliculasConectadas() {
+		
+		System.out.println("Introduce el nombre de la primera película");
+		Scanner sc1 = new Scanner(System.in);
+		String p1 = sc1.nextLine();
+		System.out.println("Introduce el nombre de la segunda película");
+		Scanner sc2 = new Scanner(System.in);
+		String p2 = sc2.nextLine();
+		StopWatch sw = new StopWatch();
+		if (RegistroPeliculas.getRegistroPeliculas().estaEnGrafo(p1) &&
+			RegistroPeliculas.getRegistroPeliculas().estaEnGrafo(p2)) {
+			boolean resultado = RegistroPeliculas.getRegistroPeliculas().estanConectadas(p1, p2);
+				if (resultado) {System.out.println("Las películas están conectadas");}
+				else {System.out.println("Estas dos películas no están conectadas");}
+		}
+		else {System.out.println("Alguna de las películas no está en el registro");}
 		System.out.println(sw.elapsedTime());
 	}
 }

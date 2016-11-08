@@ -1,7 +1,10 @@
 package packGrafos;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import packActor.Actor;
 import packPeliculas.ListaPeliculas;
@@ -42,9 +45,33 @@ public class GraphHash {
 	}
 	
 	public boolean estanConectadas(String p1, String p2) {
-		boolean esta = false;
-    
-		return esta;
+		boolean conectadas = false;
+		if(!g.containsKey(p1) || !g.containsKey(p2)) {return conectadas;}
+        else {
+        	String actual;
+    		Deque<String> paraComprobar = new ArrayDeque<String>();
+    		HashSet<String> comprobados = new HashSet<String>();
+    		paraComprobar.push(p1);
+    		comprobados.add(p1);
+    		
+    		while(!conectadas && !paraComprobar.isEmpty()) {
+                actual = paraComprobar.pop();
+                if(actual.equals(p2)) {conectadas = true;}
+                else {
+                    for (String x: g.get(actual)) {
+                        if(!comprobados.contains(x)) {
+                            paraComprobar.push(x);
+                            comprobados.add(x);
+                        }
+                    }
+                }
+    		}
+        }
+		return conectadas;
+	}
+	
+	public boolean contains(String p1) {
+		return g.containsKey(p1);
 	}
 	
 }
