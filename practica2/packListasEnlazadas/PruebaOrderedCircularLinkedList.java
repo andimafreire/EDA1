@@ -30,12 +30,12 @@ public class PruebaOrderedCircularLinkedList {
 			
 			
 			OrderedCircularLinkedList<Persona> l2 = new OrderedCircularLinkedList<Persona>();
-			l2.add(new Persona("jon", "1111"));
-			l2.add(new Persona("ana", "7777"));
-			l2.add(new Persona("amaia", "3333"));
-			l2.add(new Persona("unai", "8888"));
-			l2.add(new Persona("pedro", "2222"));
-			l2.add(new Persona("olatz", "5555"));
+			l2.add(new Persona("Jon", "1111"));
+			l2.add(new Persona("Ana", "7777"));
+			l2.add(new Persona("Amaia", "3333"));
+			l2.add(new Persona("Unai", "8888"));
+			l2.add(new Persona("Pedro", "2222"));
+			l2.add(new Persona("Olatz", "5555"));
 
 			l2.remove(new Persona("", "8888"));
 

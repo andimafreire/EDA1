@@ -114,17 +114,19 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		// Determina si la lista contiene un elemento concreto, y develve su
 		// referencia, null en caso de que no est�
 		// COSTE: Lineal O(n)
+		if (last==null) {return null;}
+		else {
 		Node<T> act = this.last;
 		while (act.next!=this.last){
 			if (act.next.data.equals(elem)){
 				return act.next.data;
 			}
-			else act =act.next;
+			else act=act.next;
 		}
 		if (act.next.data.equals(elem)){
 			return act.next.data;
 		}
-		return null;
+		return null;}
 	}
 
 	public boolean isEmpty() { // Determina si la lista est� vac�a
@@ -145,8 +147,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		private int cont = count;
 		@Override
 		public boolean hasNext() {
-			if (current==null)return false;
-			else if (cont<=0)return false;
+			if (cont<=0)return false;
 			else return true;
 		}
 

@@ -8,6 +8,8 @@ public class OrderedCircularLinkedList<T> extends CircularLinkedList<T> implemen
 		Node<T> nuevo = new Node<T>(elem);
 		if(last==null){
 			last = nuevo;
+			nuevo.next=last;
+			count++;
 		}
 		else{
 			boolean anadido = false;
@@ -17,6 +19,7 @@ public class OrderedCircularLinkedList<T> extends CircularLinkedList<T> implemen
 				if (act.data.toString().compareTo(elem.toString())>0){ //si act es mayor que elem introduce elem delante.
 					ant.next = nuevo;
 					nuevo.next = act;
+					count++;
 					anadido = true;
 				}
 				else {
@@ -28,6 +31,7 @@ public class OrderedCircularLinkedList<T> extends CircularLinkedList<T> implemen
 				if(act.next.data.toString().compareTo(elem.toString())>0){ //si act es mayor que elem introduce elem delante.
 					ant.next = nuevo;
 					nuevo.next = act;
+					count++;
 				}
 				else{
 					nuevo.next = last.next;
