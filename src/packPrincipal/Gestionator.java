@@ -1,6 +1,7 @@
 package packPrincipal;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import packActor.Actor;
@@ -42,6 +43,7 @@ public class Gestionator {
 		System.out.println(" 9. Obtener lista ordenada de actores ");
 		System.out.println(" 10. Crear grafo de actores y películas ");
 		System.out.println(" 11. Mirar si dos películas están conectadas ");
+		System.out.println(" 12. Ver cuantas llamadas a estanConectadas hace en 1 minuto ");
 		System.out.println();
 		System.out.println("------------------------------------------------------------");
 		System.out.println();
@@ -104,6 +106,9 @@ public class Gestionator {
 		    	peliculasConectadas();
 	    	}
 		      break;
+	    case 12:
+		      minutoConectadas();
+		      break;
 	    default:
 	      System.out.println("El número introducido no está en el rango");
 	      break;
@@ -116,10 +121,12 @@ public class Gestionator {
 	}
 	
 	private static void cargarLista(){
+		System.out.println("Cargando...");
 		RegistroPeliculas.cargarLista(ruta);
 	}
 	
 	private static void exportarLista() {
+		System.out.println("Exportando...");
 		RegistroPeliculas.exportarLista(ruta);
 	}
 	
@@ -131,7 +138,7 @@ public class Gestionator {
 		Actor a = RegistroActores.getRegistroActores().buscarActor(apeNom);
 		if (a!=null) System.out.println("El actor ha sido encontrado");
 		else System.out.println("El actor no ha sido encontrado");
-		System.out.println(sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime());
 	}
 
 	private static void insertarActor() {
@@ -141,7 +148,7 @@ public class Gestionator {
 		StopWatch sw = new StopWatch();
 		Actor a = new Actor(nom);
 		RegistroActores.getRegistroActores().anadirActor(a);
-		System.out.println(sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime());
 	}
 	
 	private static void borrarActor() {
@@ -150,7 +157,7 @@ public class Gestionator {
 		String apeNom = sc.nextLine();
 		StopWatch sw = new StopWatch();
 		RegistroActores.getRegistroActores().eliminarActor(apeNom);
-		System.out.println(sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime());
 	}
 	
 	private static void escribirPeliculasActor() {
@@ -161,7 +168,7 @@ public class Gestionator {
 		Actor a = RegistroActores.getRegistroActores().buscarActor(apeNom);
 		if (a!=null) a.imprimirPeliculas();
 		else System.out.println("El actor no ha sido encontrado");
-		System.out.println(sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime());
 	}
 	
 	private static void imprimirActoresPelicula() {
@@ -172,7 +179,7 @@ public class Gestionator {
 		Pelicula peli = RegistroPeliculas.getRegistroPeliculas().buscarPelicula(nombre);
 		if (peli!=null) peli.imprimirseCompleto();	
 		else System.out.println("La pelicula no ha sido encontrada");
-		System.out.println(sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime());
 	}
 	
 	private static void incrementarRecaudacion() {
@@ -181,7 +188,7 @@ public class Gestionator {
 		String nombre = sc.nextLine();
 		StopWatch sw = new StopWatch();
 		Pelicula peli = RegistroPeliculas.getRegistroPeliculas().buscarPelicula(nombre);	
-		System.out.println(sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime());
 		if (peli!=null) {
 			System.out.println("Introduce la recaudación a incrementar");
 			int recau = sc.nextInt();
@@ -195,10 +202,11 @@ public class Gestionator {
 		StopWatch sw = new StopWatch();
 		ArrayList<Actor> lista = RegistroActores.getRegistroActores().ListaOrdenadaActores();
 		RegistroActores.getRegistroActores().imprimirActores(lista);
-		System.out.println(sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime());
 	}
 	
 	private static void crearGrafo() {
+		System.out.println("Creando...");
 		StopWatch sw = new StopWatch();
 		RegistroPeliculas.getRegistroPeliculas().crearGrafo();   
 		
@@ -207,7 +215,7 @@ public class Gestionator {
             Hay que hacer un programa de prueba para probarlo sin imprimir
             
         RegistroPeliculas.getRegistroPeliculas().printGrafo(); */
-		System.out.println(sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime());
 	}
 	
 	private static void peliculasConectadas() {
@@ -226,6 +234,23 @@ public class Gestionator {
 				else {System.out.println("Estas dos películas no están conectadas");}
 		}
 		else {System.out.println("Alguna de las películas no está en el registro");}
-		System.out.println(sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime());
+	}
+	
+	private static void minutoConectadas() {
+		System.out.println("Por favor, espere un minuto a su resultado");
+		int llamadas = 0;
+		int max = RegistroPeliculas.getRegistroPeliculas().getPelis().obtenerNumPeliculas();
+		Random randomGenerator = new Random();
+		StopWatch sw = new StopWatch();
+		while (sw.elapsedTime()<=60000) {
+			int i = randomGenerator.nextInt(max);
+			String p1 = RegistroPeliculas.getRegistroPeliculas().getPelis().obtenerPeliEnPos(i).getNombre();
+			int j = randomGenerator.nextInt(max);
+			String p2 = RegistroPeliculas.getRegistroPeliculas().getPelis().obtenerPeliEnPos(j).getNombre();
+			RegistroPeliculas.getRegistroPeliculas().estanConectadas(p1,p2);
+			llamadas++;
+		}
+		System.out.println("Se han hecho las siguientes llamadas a estanConectadas en un minuto: " + llamadas);
 	}
 }

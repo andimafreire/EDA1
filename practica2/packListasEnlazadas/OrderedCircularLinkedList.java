@@ -37,6 +37,7 @@ public class OrderedCircularLinkedList<T> extends CircularLinkedList<T> implemen
 					nuevo.next = last.next;
 					last.next = nuevo;
 					last = nuevo;
+					count++;
 				}
 			}		
 		}	
