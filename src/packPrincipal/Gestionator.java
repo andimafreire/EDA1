@@ -44,6 +44,7 @@ public class Gestionator {
 		System.out.println(" 10. Crear grafo de actores y películas ");
 		System.out.println(" 11. Mirar si dos películas están conectadas ");
 		System.out.println(" 12. Ver cuantas llamadas a estanConectadas hace en 1 minuto ");
+		System.out.println(" 13. Obtener pageRank de los Actores ");
 		System.out.println();
 		System.out.println("------------------------------------------------------------");
 		System.out.println();
@@ -108,6 +109,9 @@ public class Gestionator {
 		      break;
 	    case 12:
 		      minutoConectadas();
+		      break;
+	    case 13:
+		      pageRank();
 		      break;
 	    default:
 	      System.out.println("El número introducido no está en el rango");
@@ -252,5 +256,13 @@ public class Gestionator {
 			llamadas++;
 		}
 		System.out.println("Se han hecho las siguientes llamadas a estanConectadas en un minuto: " + llamadas);
+	}
+	
+	private static void pageRank() {
+		System.out.println("Cargando... ");
+		StopWatch sw = new StopWatch();
+		RegistroPeliculas.getRegistroPeliculas().pageRank();
+		//TODO Falta quitar de este HashMap las películas y ordenarlo de mayor a menor PageRank
+		System.out.println("Tiempo tardado: " + sw.elapsedTime());
 	}
 }

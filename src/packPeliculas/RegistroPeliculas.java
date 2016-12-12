@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
@@ -113,6 +114,10 @@ public class RegistroPeliculas {
 	
 	public boolean estaEnGrafo(String p1) {
 		return grafo.contains(p1);
+	}
+	
+	public HashMap<String,Double> pageRank() {
+		return grafo.pageRank();
 	}
 	
 }
