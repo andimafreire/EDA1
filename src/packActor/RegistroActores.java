@@ -90,19 +90,25 @@ public class RegistroActores {
 		}
 	}
 
+		//pageRank
+	
 	public ArrayList<String> pageRankOrdenado(HashMap<String, Double> pR) {
-		ArrayList<Actor> actoresPR = new ArrayList<Actor>();
-		ArrayList<String> PRordenado = new ArrayList<String>();
-		
+		ArrayList<Actor> actores = new ArrayList<Actor>();
+		Actor a;
 		for (String s : pR.keySet()) {
-			Actor a = buscarActor(s);
-			a.setPR(pR.get(s));
-			actoresPR.add(a);
+			a = buscarActor(s);
+				if (!actores.contains(a)) {
+					a.setPR(pR.get(s));
+					actores.add(a);
+				}
 		}
-		quickSortPR(actoresPR, 0, actoresPR.size() - 1);
 		
-		for (Actor a : actoresPR) {
-			PRordenado.add(a.getNombre());
+		//El quickSort da StackOverflow
+		quickSortPR(actores, 0, actores.size() - 1);
+		
+		ArrayList<String> PRordenado = new ArrayList<String>();
+		for (Actor act : actores) {
+			PRordenado.add(act.getNombre());
 		}
 		
 		return PRordenado;
@@ -114,7 +120,6 @@ public class RegistroActores {
 			quickSortPR(pLista, pInicio, indiceParticion - 1);
 			quickSortPR(pLista, indiceParticion + 1, pFinal);
 		}
-
 	}
 
 	private int particionPR(ArrayList<Actor> pLista, int pInicio, int pFinal) {
@@ -127,11 +132,17 @@ public class RegistroActores {
 			while (pLista.get(der).comparePR(pivote) > 0)
 				der--;
 			if (izq < der)
-				swap(pLista, izq, der);
+				swapPR(pLista, izq, der);
 		}
 		pLista.set(pInicio, pLista.get(der));
 		pLista.set(der, pivote);
 		return der;
 	}
 
+	private void swapPR(ArrayList<Actor> pLista, int pIzq, int pDer) {
+		Actor aux = pLista.get(pIzq);
+		pLista.set(pIzq, pLista.get(pDer));
+		pLista.set(pDer, aux);
+	}
+	
 }

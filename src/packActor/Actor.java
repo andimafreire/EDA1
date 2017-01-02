@@ -57,9 +57,7 @@ public class Actor implements Comparable<Actor> {
 	}
 	 
 	 public int comparePR(Actor a) {
-			if (a.getPR()>this.pR) return 1;
-			else if (a.getPR()<this.pR) return -1;
-			else return 0;
+		 return this.pR.compareTo(a.pR);
 		}
 	
 	@Override

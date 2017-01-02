@@ -1,7 +1,9 @@
 package packPrincipal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -26,7 +28,7 @@ public class Gestionator {
 	}
 	
 	public static void obtenerRuta() {
-		System.out.println("Inserte la ruta de su archivo (Recuerde que windows pone los slashes al revés)");
+		System.out.println("Inserte la ruta de su archivo (Recuerde que windows pone los slash al revés)");
 		System.out.println("Por ejempo: C:/javaWork/EDA1/documentos/archivos/FilmsActors20162017Small.txt");
 		System.out.println("Si introduce mal la ruta el programa no funcionará y tendrá que reiniciar la aplicación");
 		Scanner sc = new Scanner(System.in);
@@ -49,7 +51,7 @@ public class Gestionator {
 		System.out.println(" 11. Mirar si dos películas están conectadas ");
 		System.out.println(" 12. Llamadas a estanConectadas en 1 minuto ");
 		System.out.println(" 13. Calcular pageRank de actores ");
-		System.out.println(" 14. Ordenar actores por pageRank e imprimir 100 ");
+		System.out.println(" 14. Ordenar actores por pageRank e imprimir 100 primeros ");
 		System.out.println();
 		System.out.println("------------------------------------------------------------");
 		System.out.println();
@@ -134,7 +136,7 @@ public class Gestionator {
 	    	else if (!pageRankCreado) {
 	    		System.out.println("Debes obtener primero el pageRank sin ordenar");}
 	    	else if (ficheroCargado && grafoCreado && pageRankCreado) {
-		    	pageRankOrdenado();
+	    		pageRankOrdenado();
 	    	}
 		      break;
 	    default:
@@ -291,7 +293,7 @@ public class Gestionator {
 		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 			//Imprime los 100 primeros actores segun pageRank
 		for (int i=0; i<100; i++) {
-			System.out.println("Actor: " + ordenado.get(i) + " | PageRank: " + ordenado.get(i));
+			System.out.println(i + ":  " + ordenado.get(i));
 		}
 	}
 }

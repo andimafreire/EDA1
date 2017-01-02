@@ -86,8 +86,6 @@ public class GraphHash {
 				nodos.put(s,(double)g.get(s).size());
 			}
 			
-			//ESTA SACANDO EL MISMO SIZE A TODOS
-			
 		//Contiene 1/N como probabilidad inicial
 		HashMap<String,Double> hs = new HashMap<String,Double>();
 			for (String s: g.keySet()) {
