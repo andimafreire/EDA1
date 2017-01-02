@@ -1,6 +1,8 @@
 package packPrincipal;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -11,8 +13,10 @@ import packPeliculas.RegistroPeliculas;
 
 public class Gestionator {
 	private Gestionator elGestionator;
+	private static HashMap<String,Double> PR;
 	private static boolean ficheroCargado = false;
 	private static boolean grafoCreado = false;
+	private static boolean pageRankCreado = false;
 	private static String ruta;
 	
 	private Gestionator() {}
@@ -23,7 +27,7 @@ public class Gestionator {
 	
 	public static void obtenerRuta() {
 		System.out.println("Inserte la ruta de su archivo (Recuerde que windows pone los slashes al revés)");
-		System.out.println("Por ejempo: C:/workspaceEclipse/EDA1/documentos/archivos/FilmsActors20162017Small.txt");
+		System.out.println("Por ejempo: C:/javaWork/EDA1/documentos/archivos/FilmsActors20162017Small.txt");
 		System.out.println("Si introduce mal la ruta el programa no funcionará y tendrá que reiniciar la aplicación");
 		Scanner sc = new Scanner(System.in);
 		ruta = sc.nextLine();
@@ -43,8 +47,10 @@ public class Gestionator {
 		System.out.println(" 9. Obtener lista ordenada de actores ");
 		System.out.println(" 10. Crear grafo de actores y películas ");
 		System.out.println(" 11. Mirar si dos películas están conectadas ");
-		System.out.println(" 12. Ver cuantas llamadas a estanConectadas hace en 1 minuto ");
-		System.out.println(" 13. Obtener pageRank de los Actores ");
+		System.out.println(" 12. Llamadas a estanConectadas en 1 minuto ");
+		System.out.println(" 13. Calcular pageRank de actores ");
+		System.out.println(" 14. Ordenar actores por pageRank ");
+		System.out.println(" 15. Imprimir 100 primeros actores y su pageRank ");
 		System.out.println();
 		System.out.println("------------------------------------------------------------");
 		System.out.println();
@@ -108,10 +114,40 @@ public class Gestionator {
 	    	}
 		      break;
 	    case 12:
-		      minutoConectadas();
-		      break;
+	    	minutoConectadas();
+	    	break;
+	    	
 	    case 13:
-		      pageRank();
+	    	if (!ficheroCargado){
+	    		System.out.println("Debes cargar el fichero primero");}
+	    	else if (!grafoCreado) {
+	    		System.out.println("Debes crear el grafo primero");}
+	    	else if (ficheroCargado && grafoCreado) {
+		    	createPageRank();
+		    	pageRankCreado = true;
+	    	}
+		      break;
+	    case 14:
+	    	if (!ficheroCargado){
+	    		System.out.println("Debes cargar el fichero primero");}
+	    	else if (!grafoCreado) {
+	    		System.out.println("Debes crear el grafo primero");}
+	    	else if (!pageRankCreado) {
+	    		System.out.println("Debes obtener primero el pageRank sin ordenar");}
+	    	else if (ficheroCargado && grafoCreado && pageRankCreado) {
+		    	pageRankOrdenado();
+	    	}
+		      break;
+	    case 15:
+	    	if (!ficheroCargado){
+	    		System.out.println("Debes cargar el fichero primero");}
+	    	else if (!grafoCreado) {
+	    		System.out.println("Debes crear el grafo primero");}
+	    	else if (!pageRankCreado) {
+	    		System.out.println("Debes obtener primero el pageRank");}
+	    	else if (ficheroCargado && grafoCreado && pageRankCreado) {
+		    	comprobarPageRankOrdenado();
+	    	}
 		      break;
 	    default:
 	      System.out.println("El número introducido no está en el rango");
@@ -212,13 +248,7 @@ public class Gestionator {
 	private static void crearGrafo() {
 		System.out.println("Creando...");
 		StopWatch sw = new StopWatch();
-		RegistroPeliculas.getRegistroPeliculas().crearGrafo();   
-		
-        /*    Hay millones de datos, tarda demasiado en imprimir
-            Usar bajo respondasibilidad propia
-            Hay que hacer un programa de prueba para probarlo sin imprimir
-            
-        RegistroPeliculas.getRegistroPeliculas().printGrafo(); */
+		RegistroPeliculas.getRegistroPeliculas().crearGrafo(); 
 		System.out.println("Tiempo tardado: " + sw.elapsedTime());
 	}
 	
@@ -242,27 +272,56 @@ public class Gestionator {
 	}
 	
 	private static void minutoConectadas() {
-		System.out.println("Por favor, espere un minuto a su resultado");
 		int llamadas = 0;
 		int max = RegistroPeliculas.getRegistroPeliculas().getPelis().obtenerNumPeliculas();
 		Random randomGenerator = new Random();
+		System.out.println("Por favor, espere un minuto a su resultado");
 		StopWatch sw = new StopWatch();
 		while (sw.elapsedTime()<=60000) {
 			int i = randomGenerator.nextInt(max);
-			String p1 = RegistroPeliculas.getRegistroPeliculas().getPelis().obtenerPeliEnPos(i).getNombre();
-			int j = randomGenerator.nextInt(max);
-			String p2 = RegistroPeliculas.getRegistroPeliculas().getPelis().obtenerPeliEnPos(j).getNombre();
-			RegistroPeliculas.getRegistroPeliculas().estanConectadas(p1,p2);
-			llamadas++;
+            String p1 = RegistroPeliculas.getRegistroPeliculas().getPelis().obtenerPeliEnPos(i).getNombre();
+            int j = randomGenerator.nextInt(max);
+            String p2 = RegistroPeliculas.getRegistroPeliculas().getPelis().obtenerPeliEnPos(j).getNombre();
+            RegistroPeliculas.getRegistroPeliculas().estanConectadas(p1,p2);
+            llamadas++;
 		}
-		System.out.println("Se han hecho las siguientes llamadas a estanConectadas en un minuto: " + llamadas);
+        System.out.println("Se han hecho las siguientes llamadas a estanConectadas en un minuto: " + llamadas);
 	}
 	
-	private static void pageRank() {
-		System.out.println("Cargando... ");
+	private static void createPageRank() {
+		System.out.println("Creando... ");
 		StopWatch sw = new StopWatch();
-		RegistroPeliculas.getRegistroPeliculas().pageRank();
-		//TODO Falta quitar de este HashMap las películas y ordenarlo de mayor a menor PageRank
+		PR = pageRank();
+		System.out.println("pageRank creado ");
 		System.out.println("Tiempo tardado: " + sw.elapsedTime());
+	}
+	
+	private static HashMap<String,Double> pageRank() {
+		//Seria más eficiente trabajar directamente en el PR global
+		//pero el enunciado pide que el metodo devuelva un HashMap
+		
+		HashMap<String,Double> hashPR = RegistroPeliculas.getRegistroPeliculas().pageRank();
+		HashMap<String,Double> hashPR2 = RegistroPeliculas.getRegistroPeliculas().pageRank();
+		//Usamos dos HashMap para evitar ConcurrentModificationException
+		for (String s: hashPR2.keySet()) {
+			if (!RegistroActores.getRegistroActores().contains(s)){
+				hashPR.remove(s);
+			}
+		}
+		return hashPR;
+	}
+	
+	private static void pageRankOrdenado() {
+		StopWatch sw = new StopWatch();
+		
+		System.out.println("Tiempo tardado: " + sw.elapsedTime());		
+	}
+	
+	private static void comprobarPageRankOrdenado() {
+		List<String> actores = new ArrayList<String>(PR.keySet());
+		List<Double> ranks = new ArrayList<Double>(PR.values());
+		for (int i=0; i<100; i++) {
+			System.out.println("Actor: " + actores.get(i) + " | PageRank: " + ranks.get(i));
+		}
 	}
 }

@@ -20,6 +20,10 @@ public class RegistroActores {
 		return elRegistroActores;
 	}
 
+	public boolean contains(String pActor) {
+		return mapaActores.containsKey(pActor);
+	}
+	
 	public Actor buscarActor(String pApeNom) {
 		return mapaActores.get(pApeNom);
 	}

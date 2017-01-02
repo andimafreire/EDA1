@@ -116,7 +116,7 @@ public class RegistroPeliculas {
 		return grafo.contains(p1);
 	}
 	
-	public HashMap<String,Double> pageRank() {
+	public HashMap<String,Integer> pageRank() {
 		return grafo.pageRank();
 	}
 	

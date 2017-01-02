@@ -77,22 +77,42 @@ public class GraphHash {
 	public HashMap<String,Double> pageRank() {
 		Double d = 0.85;
 		Double PR = 0.0;
+		
+		//Contiene el numero total de enlaces de cada Actor
 		HashMap<String,Double> nodos = new HashMap<String,Double>();
 			for (String s: g.keySet()) {
-				nodos.put(s,(double)g.get(s).size());}
+				nodos.put(s,(double)g.get(s).size());
+			}
+			
+			//ESTA SACANDO EL MISMO SIZE A TODOS
+			
+		//Contiene 1/N como probabilidad inicial
 		HashMap<String,Double> hs = new HashMap<String,Double>();
 			for (String s: g.keySet()) {
-				hs.put(s,(double)1/g.size());}
-		HashMap<String,Double> PRs = new HashMap<String,Double>();
+				hs.put(s,(double)1/g.size());
+			}
+			
+		//Contiene la probabilidad anterior
+		HashMap<String,Double> PRs = hs;
 		
+		//Primera iteracion
+		for (String s: hs.keySet()) {
+			for (String k: g.get(s)) {
+				PR = PR + hs.get(k);
+			}
+		hs.put(s,(((1.0-d)/g.size())+d*(PR/nodos.get(s))));
+		PR = 0.0;
+		}	
+	
+		//Proceso
 		while (diferencia(hs,PRs)>0.0001) {
 		PRs = hs;
 			for (String s: hs.keySet()) {
-				PR = 0.0;
 				for (String k: g.get(s)) {
 					PR = PR + hs.get(k);
 				}
 			hs.put(s,(((1.0-d)/g.size())+d*(PR/nodos.get(s))));
+			PR = 0.0;
 			}	
 		}
 		return hs;
