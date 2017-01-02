@@ -49,8 +49,7 @@ public class Gestionator {
 		System.out.println(" 11. Mirar si dos películas están conectadas ");
 		System.out.println(" 12. Llamadas a estanConectadas en 1 minuto ");
 		System.out.println(" 13. Calcular pageRank de actores ");
-		System.out.println(" 14. Ordenar actores por pageRank ");
-		System.out.println(" 15. Imprimir 100 primeros actores y su pageRank ");
+		System.out.println(" 14. Ordenar actores por pageRank e imprimir 100 ");
 		System.out.println();
 		System.out.println("------------------------------------------------------------");
 		System.out.println();
@@ -138,17 +137,6 @@ public class Gestionator {
 		    	pageRankOrdenado();
 	    	}
 		      break;
-	    case 15:
-	    	if (!ficheroCargado){
-	    		System.out.println("Debes cargar el fichero primero");}
-	    	else if (!grafoCreado) {
-	    		System.out.println("Debes crear el grafo primero");}
-	    	else if (!pageRankCreado) {
-	    		System.out.println("Debes obtener primero el pageRank");}
-	    	else if (ficheroCargado && grafoCreado && pageRankCreado) {
-		    	comprobarPageRankOrdenado();
-	    	}
-		      break;
 	    default:
 	      System.out.println("El número introducido no está en el rango");
 	      break;
@@ -178,7 +166,7 @@ public class Gestionator {
 		Actor a = RegistroActores.getRegistroActores().buscarActor(apeNom);
 		if (a!=null) System.out.println("El actor ha sido encontrado");
 		else System.out.println("El actor no ha sido encontrado");
-		System.out.println("Tiempo tardado: " + sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 	}
 
 	private static void insertarActor() {
@@ -188,7 +176,7 @@ public class Gestionator {
 		StopWatch sw = new StopWatch();
 		Actor a = new Actor(nom);
 		RegistroActores.getRegistroActores().anadirActor(a);
-		System.out.println("Tiempo tardado: " + sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 	}
 	
 	private static void borrarActor() {
@@ -197,7 +185,7 @@ public class Gestionator {
 		String apeNom = sc.nextLine();
 		StopWatch sw = new StopWatch();
 		RegistroActores.getRegistroActores().eliminarActor(apeNom);
-		System.out.println("Tiempo tardado: " + sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 	}
 	
 	private static void escribirPeliculasActor() {
@@ -208,7 +196,7 @@ public class Gestionator {
 		Actor a = RegistroActores.getRegistroActores().buscarActor(apeNom);
 		if (a!=null) a.imprimirPeliculas();
 		else System.out.println("El actor no ha sido encontrado");
-		System.out.println("Tiempo tardado: " + sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 	}
 	
 	private static void imprimirActoresPelicula() {
@@ -219,7 +207,7 @@ public class Gestionator {
 		Pelicula peli = RegistroPeliculas.getRegistroPeliculas().buscarPelicula(nombre);
 		if (peli!=null) peli.imprimirseCompleto();	
 		else System.out.println("La pelicula no ha sido encontrada");
-		System.out.println("Tiempo tardado: " + sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 	}
 	
 	private static void incrementarRecaudacion() {
@@ -228,7 +216,7 @@ public class Gestionator {
 		String nombre = sc.nextLine();
 		StopWatch sw = new StopWatch();
 		Pelicula peli = RegistroPeliculas.getRegistroPeliculas().buscarPelicula(nombre);	
-		System.out.println("Tiempo tardado: " + sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 		if (peli!=null) {
 			System.out.println("Introduce la recaudación a incrementar");
 			int recau = sc.nextInt();
@@ -241,15 +229,15 @@ public class Gestionator {
 	private static void obtenerListaOrdenadaActores() {
 		StopWatch sw = new StopWatch();
 		ArrayList<Actor> lista = RegistroActores.getRegistroActores().ListaOrdenadaActores();
-		RegistroActores.getRegistroActores().imprimirActores(lista);
-		System.out.println("Tiempo tardado: " + sw.elapsedTime());
+		//RegistroActores.getRegistroActores().imprimirActores(lista);
+		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 	}
 	
 	private static void crearGrafo() {
 		System.out.println("Creando...");
 		StopWatch sw = new StopWatch();
 		RegistroPeliculas.getRegistroPeliculas().crearGrafo(); 
-		System.out.println("Tiempo tardado: " + sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 	}
 	
 	private static void peliculasConectadas() {
@@ -268,7 +256,7 @@ public class Gestionator {
 				else {System.out.println("Estas dos películas no están conectadas");}
 		}
 		else {System.out.println("Alguna de las películas no está en el registro");}
-		System.out.println("Tiempo tardado: " + sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 	}
 	
 	private static void minutoConectadas() {
@@ -291,37 +279,19 @@ public class Gestionator {
 	private static void createPageRank() {
 		System.out.println("Creando... ");
 		StopWatch sw = new StopWatch();
-		PR = pageRank();
+		PR = RegistroPeliculas.getRegistroPeliculas().pageRank();
 		System.out.println("pageRank creado ");
-		System.out.println("Tiempo tardado: " + sw.elapsedTime());
-	}
-	
-	private static HashMap<String,Double> pageRank() {
-		//Seria más eficiente trabajar directamente en el PR global
-		//pero el enunciado pide que el metodo devuelva un HashMap
-		
-		HashMap<String,Double> hashPR = RegistroPeliculas.getRegistroPeliculas().pageRank();
-		HashMap<String,Double> hashPR2 = RegistroPeliculas.getRegistroPeliculas().pageRank();
-		//Usamos dos HashMap para evitar ConcurrentModificationException
-		for (String s: hashPR2.keySet()) {
-			if (!RegistroActores.getRegistroActores().contains(s)){
-				hashPR.remove(s);
-			}
-		}
-		return hashPR;
+		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 	}
 	
 	private static void pageRankOrdenado() {
 		StopWatch sw = new StopWatch();
-		
-		System.out.println("Tiempo tardado: " + sw.elapsedTime());		
-	}
-	
-	private static void comprobarPageRankOrdenado() {
-		List<String> actores = new ArrayList<String>(PR.keySet());
-		List<Double> ranks = new ArrayList<Double>(PR.values());
+		System.out.println("Ordenando... ");
+		ArrayList<String> ordenado = RegistroActores.getRegistroActores().pageRankOrdenado(PR);
+		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
+			//Imprime los 100 primeros actores segun pageRank
 		for (int i=0; i<100; i++) {
-			System.out.println("Actor: " + actores.get(i) + " | PageRank: " + ranks.get(i));
+			System.out.println("Actor: " + ordenado.get(i) + " | PageRank: " + ordenado.get(i));
 		}
 	}
 }

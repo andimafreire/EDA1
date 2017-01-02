@@ -7,8 +7,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import packActor.Actor;
+import packActor.RegistroActores;
 import packPeliculas.ListaPeliculas;
 import packPeliculas.Pelicula;
+import packPeliculas.RegistroPeliculas;
 
 public class GraphHash {
 
@@ -115,7 +117,16 @@ public class GraphHash {
 			PR = 0.0;
 			}	
 		}
-		return hs;
+		
+		HashMap<String,Double> hs2 = new HashMap<String,Double>();
+		
+		for (String s: hs.keySet()) {
+			if (RegistroActores.getRegistroActores().contains(s)){
+				hs2.put(s,hs.get(s));
+			}
+		}
+		
+		return hs2;
 	}
 	
 	private Double diferencia(HashMap<String,Double> hs,HashMap<String,Double> PRs) {

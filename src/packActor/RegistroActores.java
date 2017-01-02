@@ -89,4 +89,49 @@ public class RegistroActores {
 			itr.next().imprimirse();
 		}
 	}
+
+	public ArrayList<String> pageRankOrdenado(HashMap<String, Double> pR) {
+		ArrayList<Actor> actoresPR = new ArrayList<Actor>();
+		ArrayList<String> PRordenado = new ArrayList<String>();
+		
+		for (String s : pR.keySet()) {
+			Actor a = buscarActor(s);
+			a.setPR(pR.get(s));
+			actoresPR.add(a);
+		}
+		quickSortPR(actoresPR, 0, actoresPR.size() - 1);
+		
+		for (Actor a : actoresPR) {
+			PRordenado.add(a.getNombre());
+		}
+		
+		return PRordenado;
+	}
+	
+	private void quickSortPR(ArrayList<Actor> pLista, int pInicio, int pFinal) {
+		if (pFinal - pInicio > 0) {
+			int indiceParticion = particionPR(pLista, pInicio, pFinal);
+			quickSortPR(pLista, pInicio, indiceParticion - 1);
+			quickSortPR(pLista, indiceParticion + 1, pFinal);
+		}
+
+	}
+
+	private int particionPR(ArrayList<Actor> pLista, int pInicio, int pFinal) {
+		Actor pivote = pLista.get(pInicio);
+		int izq = pInicio;
+		int der = pFinal;
+		while (izq < der) {
+			while (pLista.get(izq).comparePR(pivote) <= 0 && izq < der)
+				izq++;
+			while (pLista.get(der).comparePR(pivote) > 0)
+				der--;
+			if (izq < der)
+				swap(pLista, izq, der);
+		}
+		pLista.set(pInicio, pLista.get(der));
+		pLista.set(der, pivote);
+		return der;
+	}
+
 }

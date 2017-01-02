@@ -8,14 +8,24 @@ import packPeliculas.Pelicula;
 public class Actor implements Comparable<Actor> {
 	private String nombre;
 	private ListaPeliculas susPeliculas;
+	private Double pR;
 
 	public Actor(String pNom) {
 		this.nombre = pNom;
 		this.susPeliculas = new ListaPeliculas();
+		this.pR = 0.0;
 	}
 
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public void setPR(Double pPR) {
+		this.pR = pPR;
+	}
+	
+	public Double getPR() {
+		return this.pR;
 	}
 
 	public void anadirPelicula(Pelicula p) {
@@ -45,6 +55,12 @@ public class Actor implements Comparable<Actor> {
 	 public ArrayList<String> peliculasString() {
 		return susPeliculas.toArrayString();
 	}
+	 
+	 public int comparePR(Actor a) {
+			if (a.getPR()>this.pR) return 1;
+			else if (a.getPR()<this.pR) return -1;
+			else return 0;
+		}
 	
 	@Override
 	public int compareTo(Actor a) {
