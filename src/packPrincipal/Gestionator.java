@@ -279,10 +279,10 @@ public class Gestionator {
 	}
 	
 	private static void createPageRank() {
-		System.out.println("Creando... ");
+		System.out.println("Calculando... ");
 		StopWatch sw = new StopWatch();
 		PR = RegistroPeliculas.getRegistroPeliculas().pageRank();
-		System.out.println("pageRank creado ");
+		System.out.println("pageRank calculado ");
 		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 	}
 	

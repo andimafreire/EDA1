@@ -93,12 +93,16 @@ public class GraphHash {
 			}
 			
 		//Contiene la probabilidad anterior
-		HashMap<String,Double> PRs = hs;
+		HashMap<String,Double> PRs = new HashMap<String,Double>();
+		PRs = hs;
+		
+		//Lo usaremos de auxiliar
+		HashMap<String,Double> aux = new HashMap<String,Double>();
 		
 		//Primera iteracion
 		for (String s: hs.keySet()) {
 			for (String k: g.get(s)) {
-				PR = PR + hs.get(k);
+				PR = PR + PRs.get(k);
 			}
 		hs.put(s,(((1.0-d)/g.size())+d*(PR/nodos.get(s))));
 		PR = 0.0;
@@ -106,14 +110,15 @@ public class GraphHash {
 	
 		//Proceso
 		while (diferencia(hs,PRs)>0.0001) {
-		PRs = hs;
+		aux = hs;
 			for (String s: hs.keySet()) {
 				for (String k: g.get(s)) {
-					PR = PR + hs.get(k);
+					PR = PR + PRs.get(k);
 				}
 			hs.put(s,(((1.0-d)/g.size())+d*(PR/nodos.get(s))));
 			PR = 0.0;
-			}	
+			}
+		PRs = aux;
 		}
 		
 		HashMap<String,Double> hs2 = new HashMap<String,Double>();
