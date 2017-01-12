@@ -57,8 +57,8 @@ public class Actor implements Comparable<Actor> {
 	}
 	 
 	 public int comparePR(Actor a) {
-		 return this.pR.compareTo(a.pR);
-		}
+		return this.pR.compareTo(a.pR);
+	}
 	
 	@Override
 	public int compareTo(Actor a) {

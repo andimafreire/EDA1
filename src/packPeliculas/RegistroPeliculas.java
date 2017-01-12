@@ -72,7 +72,7 @@ public class RegistroPeliculas {
 			   System.out.println("El fichero no ha sido encontrado");
 		   }
 		   catch(IOException e) {e.printStackTrace();}
-		System.out.println("Tiempo tardado: " + sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 	}
 	public static void exportarLista(String ruta) {
 		StopWatch sw = new StopWatch();
@@ -96,7 +96,7 @@ public class RegistroPeliculas {
 			bw.close(); 
 			} 
 		catch (IOException e) { e.printStackTrace();}
-		System.out.println("Tiempo tardado: " + sw.elapsedTime());
+		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 	}
 	
 	public void crearGrafo() {

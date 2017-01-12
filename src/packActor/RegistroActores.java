@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
+//import java.util.concurrent.ThreadLocalRandom;
 
 
 public class RegistroActores {
@@ -97,14 +98,13 @@ public class RegistroActores {
 		Actor a;
 		for (String s : pR.keySet()) {
 			a = buscarActor(s);
-				if (!actores.contains(a)) {
-					a.setPR(pR.get(s));
-					actores.add(a);
-				}
+			a.setPR(pR.get(s));
+			actores.add(a);
 		}
 		
 		//El quickSort da StackOverflow
 		quickSortPR(actores, 0, actores.size() - 1);
+		System.out.println("HEMOS GANADO");
 		
 		ArrayList<String> PRordenado = new ArrayList<String>();
 		for (Actor act : actores) {
@@ -123,7 +123,8 @@ public class RegistroActores {
 	}
 
 	private int particionPR(ArrayList<Actor> pLista, int pInicio, int pFinal) {
-		Actor pivote = pLista.get(pInicio);
+		//int randomNum = ThreadLocalRandom.current().nextInt(pInicio, pFinal + 1);
+		Actor pivote = pLista.get((pInicio+pFinal)/2);
 		int izq = pInicio;
 		int der = pFinal;
 		while (izq < der) {
