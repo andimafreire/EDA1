@@ -103,7 +103,8 @@ public class RegistroActores {
 		}
 		
 		//El quickSort da StackOverflow
-		quickSortPR(actores, 0, actores.size() - 1);
+		//quickSortPR(actores, 0, actores.size() - 1);
+		mergeSortPR(actores, 0, actores.size() - 1);
 		System.out.println("HEMOS GANADO");
 		
 		ArrayList<String> PRordenado = new ArrayList<String>();
@@ -114,6 +115,49 @@ public class RegistroActores {
 		return PRordenado;
 	}
 	
+	private void mergeSortPR(ArrayList<Actor> pLista, int pInicio, int pFinal) {
+		if (pFinal - pInicio > 0) {
+			mergeSortPR(pLista, pInicio, (pInicio+pFinal)/2);
+			mergeSortPR(pLista, ((pInicio+pFinal)/2)+1, pFinal);
+			mezcla(pLista, pInicio, (pInicio+pFinal)/2, pFinal);
+		}
+	}
+	private void mezcla(ArrayList<Actor> pLista, int pInicio, int pCentro, int pFinal) {
+		Actor[] laMezcla = new Actor[pFinal-pInicio+1];
+		int izq = pInicio;
+		int der = pCentro+1;
+		int k = 0;
+		while (izq<=pCentro && der<=pFinal){
+			if(pLista.get(izq).comparePR(pLista.get(der))<=0){
+				laMezcla[k] = pLista.get(izq);
+				k++;
+				izq++;		
+			}
+			else{
+				laMezcla[k] = pLista.get(der);
+				k++;
+				der++;
+			}
+		}	
+		if(izq>pCentro){
+			while(der<=pFinal){
+				laMezcla[k] = pLista.get(der);
+				k++;
+				der++;
+			}
+		}
+		else{
+			while (izq<=pCentro){
+				laMezcla[k] = pLista.get(der);
+				k++;
+				izq++;
+			}
+		}
+		for(int j=pInicio; j<=pFinal; j++)
+			pLista.set(j, laMezcla[j-pInicio]);
+	}
+	
+	/*
 	private void quickSortPR(ArrayList<Actor> pLista, int pInicio, int pFinal) {
 		if (pFinal - pInicio > 0) {
 			int indiceParticion = particionPR(pLista, pInicio, pFinal);
@@ -145,5 +189,5 @@ public class RegistroActores {
 		pLista.set(pIzq, pLista.get(pDer));
 		pLista.set(pDer, aux);
 	}
-	
+	*/
 }
