@@ -293,7 +293,7 @@ public class Gestionator {
 		System.out.println("Tiempo tardado: " + sw.elapsedTime() + "ms");
 			//Imprime los 100 primeros actores segun pageRank
 		for (int i=0; i<100; i++) {
-			System.out.println(i+1 + ":  " + ordenado.get(i) + "   pageRank: " + PR.get(ordenado.get(i)));
+			System.out.println(i+1 + ":  " + ordenado.get(i));
 		}
 	}
 }
