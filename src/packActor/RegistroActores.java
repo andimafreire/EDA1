@@ -105,7 +105,6 @@ public class RegistroActores {
 		//El quickSort da StackOverflow
 		//quickSortPR(actores, 0, actores.size() - 1);
 		mergeSortPR(actores, 0, actores.size() - 1);
-		System.out.println("HEMOS GANADO");
 		
 		ArrayList<String> PRordenado = new ArrayList<String>();
 		for (Actor act : actores) {
@@ -122,6 +121,7 @@ public class RegistroActores {
 			mezcla(pLista, pInicio, (pInicio+pFinal)/2, pFinal);
 		}
 	}
+	
 	private void mezcla(ArrayList<Actor> pLista, int pInicio, int pCentro, int pFinal) {
 		Actor[] laMezcla = new Actor[pFinal-pInicio+1];
 		int izq = pInicio;
@@ -148,7 +148,7 @@ public class RegistroActores {
 		}
 		else{
 			while (izq<=pCentro){
-				laMezcla[k] = pLista.get(der);
+				laMezcla[k] = pLista.get(izq);
 				k++;
 				izq++;
 			}
